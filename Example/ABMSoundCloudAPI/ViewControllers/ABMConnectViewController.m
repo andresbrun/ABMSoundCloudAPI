@@ -20,7 +20,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#warning REMOVE THAT
+#warning REMOVE THIS
     [self.clientIDTextField setText:@"2c6da81d3f014254d3358bccd00f341a"];
     [self.secretKeyTextField setText:@"2bb216a627a0722a4e7244682f243706"];
     [self.redirectURLTextField setText:@"drummerboy://oauth"];

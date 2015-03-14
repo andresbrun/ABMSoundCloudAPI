@@ -8,6 +8,7 @@
 
 #import "ABMSearchSongsViewController.h"
 #import "ABMSoundCloudAPISingleton.h"
+#import "ABMSongDetailViewController.h"
 
 @interface ABMSearchSongsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) NSMutableArray *songsList;
@@ -28,6 +29,12 @@
    }];
 }
 
+# pragma mark - NAvigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[ABMSongDetailViewController class]]) {
+        [(ABMSongDetailViewController *)segue.destinationViewController setSongDictionary:sender];
+    }
+}
 #pragma mark - Search Bar
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 }
@@ -70,6 +77,13 @@
     [cell.detailTextLabel setText:songDictionary[@"kind"]];
     
     return cell;
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *songDictionary = [self.songsList objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"presentSong" sender:songDictionary];
+    
+    return NO;
 }
 
 #pragma mark - Helpers

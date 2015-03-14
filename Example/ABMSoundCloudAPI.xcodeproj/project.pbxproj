@@ -25,6 +25,7 @@
 		DDBD1A841AB4673700BF136C /* ABMSoundCloudAPISingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A831AB4673700BF136C /* ABMSoundCloudAPISingleton.m */; };
 		DDBD1A871AB4693700BF136C /* ABMConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A861AB4693700BF136C /* ABMConnectViewController.m */; };
 		DDBD1A8A1AB470CC00BF136C /* ABMSearchSongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */; };
+		DDBD1A8D1AB47E3900BF136C /* ABMSongDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */; };
 		E47FCD39D7F9B537AE7DB657 /* libPods-ABMSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F78B6A39650511A3117E45 /* libPods-ABMSoundCloudAPI.a */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,8 @@
 		DDBD1A861AB4693700BF136C /* ABMConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMConnectViewController.m; sourceTree = "<group>"; };
 		DDBD1A881AB470CC00BF136C /* ABMSearchSongsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMSearchSongsViewController.h; sourceTree = "<group>"; };
 		DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMSearchSongsViewController.m; sourceTree = "<group>"; };
+		DDBD1A8B1AB47E3900BF136C /* ABMSongDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMSongDetailViewController.h; sourceTree = "<group>"; };
+		DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMSongDetailViewController.m; sourceTree = "<group>"; };
 		F4721E495E4FD9F508149A15 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +213,8 @@
 				DDBD1A861AB4693700BF136C /* ABMConnectViewController.m */,
 				DDBD1A881AB470CC00BF136C /* ABMSearchSongsViewController.h */,
 				DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */,
+				DDBD1A8B1AB47E3900BF136C /* ABMSongDetailViewController.h */,
+				DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				6003F59E195388D20070C39A /* ABMAppDelegate.m in Sources */,
 				DDBD1A7D1AB4664200BF136C /* ABMMainTabBarViewController.m in Sources */,
 				DDBD1A871AB4693700BF136C /* ABMConnectViewController.m in Sources */,
+				DDBD1A8D1AB47E3900BF136C /* ABMSongDetailViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				DDBD1A841AB4673700BF136C /* ABMSoundCloudAPISingleton.m in Sources */,
 			);

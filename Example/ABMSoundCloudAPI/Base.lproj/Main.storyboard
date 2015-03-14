@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vx0-dk-Zrz">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="5Y7-Qm-KbB"/>
@@ -29,15 +29,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vx0-dk-Zrz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="EdN-3L-mMy"/>
                             <constraint firstAttribute="trailing" secondItem="vx0-dk-Zrz" secondAttribute="trailing" id="HSR-YV-L6k"/>
                             <constraint firstItem="vx0-dk-Zrz" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="INB-bK-EKV"/>
                             <constraint firstItem="vx0-dk-Zrz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="cT7-qh-v8A"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="INB-bK-EKV"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="kqT-A4-diE"/>
+                    <navigationItem key="navigationItem" title="Search" id="NOZ-Je-8XG"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="OU7-KF-f5s" id="zS6-2Y-zNI"/>
+                        <segue destination="D9b-rD-G1r" kind="show" identifier="presentSong" id="SgN-qv-D76"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -51,7 +58,48 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1792" y="505"/>
+            <point key="canvasLocation" x="2604" y="505"/>
+        </scene>
+        <!--Song Details-->
+        <scene sceneID="YtM-40-HM5">
+            <objects>
+                <viewController title="Song Details" id="D9b-rD-G1r" customClass="ABMSongDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kNz-LX-bE2"/>
+                        <viewControllerLayoutGuide type="bottom" id="7i9-V0-aOi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4WJ-WF-8HU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5I5-87-ld5">
+                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5I5-87-ld5" secondAttribute="trailing" id="1nf-lg-ddF"/>
+                            <constraint firstItem="5I5-87-ld5" firstAttribute="top" secondItem="4WJ-WF-8HU" secondAttribute="topMargin" id="FIW-Yo-5jE"/>
+                            <constraint firstItem="5I5-87-ld5" firstAttribute="leading" secondItem="4WJ-WF-8HU" secondAttribute="leadingMargin" id="IEs-Wd-i5G"/>
+                            <constraint firstItem="5I5-87-ld5" firstAttribute="top" secondItem="kNz-LX-bE2" secondAttribute="bottom" id="dew-eV-u3C"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5I5-87-ld5" secondAttribute="bottom" id="ey0-p7-9D6"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dew-eV-u3C"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="resultTextField" destination="5I5-87-ld5" id="DLS-E9-mJH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aNY-sg-t02" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3352" y="505"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="mIM-Xd-tVX">
@@ -172,7 +220,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="mru-bK-5jV"/>
+                        <segue destination="L5l-IY-wPC" kind="relationship" relationship="viewControllers" id="mru-bK-5jV"/>
                         <segue destination="dDf-2n-bjE" kind="relationship" relationship="viewControllers" id="haI-xc-y6H"/>
                         <segue destination="XnR-8S-YO6" kind="presentation" identifier="presentConnectView" id="kHw-Km-wMj"/>
                     </connections>
@@ -180,6 +228,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4G1-vM-BIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="505"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VrF-ph-chW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L5l-IY-wPC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="kqT-A4-diE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ji6-Ce-3l4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="tHP-Ou-wqj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Bg-vT-PwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792" y="505"/>
         </scene>
     </scenes>
 </document>
