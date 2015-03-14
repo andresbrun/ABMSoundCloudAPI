@@ -21,7 +21,7 @@
                             failure:(void (^)(NSError *error))failureBlock;
 
 - (void)requestPlaylistWithID:(NSString *) playlistID
-                  WithSuccess:(void (^)(NSDictionary *songsDict))successBlock
+                  withSuccess:(void (^)(NSDictionary *songsDict))successBlock
                       failure:(void (^)(NSError *error))failureBlock;
 
 - (void)requestSongsForQuery:(NSString *)query
