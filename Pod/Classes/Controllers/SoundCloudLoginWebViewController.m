@@ -16,11 +16,12 @@
 // Shows scLoginURL related screen. Checking URL response wait for a success or failure login to call resultBlock
 @implementation SoundCloudLoginWebViewController
 
-+ (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock {
++ (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL redirectURL:(NSString *)redirectURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock {
     UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SoundCloudLogin" bundle:nil] instantiateInitialViewController];
     SoundCloudLoginWebViewController *loginVC = [navController.viewControllers firstObject];
     if (loginVC) {
-        loginVC.scLoginURL = loginURL;
+        loginVC.scLoginURL = [loginURL stringByAppendingFormat:@"&redirect_uri=%@",redirectURL];
+        loginVC.redirectURL = redirectURL;
         loginVC.resultBlock = resultBlock;
     }
     return navController;
@@ -59,7 +60,7 @@
 
 - (BOOL)isFlowFinishWithRequest:(NSURLRequest *)request {
     NSString *baseURL = [@[request.URL.scheme, request.URL.host] componentsJoinedByString:@"://"];
-    return [baseURL rangeOfString:SC_REDIRECT_URI].location!=NSNotFound;
+    return [baseURL rangeOfString:self.redirectURL].location!=NSNotFound;
 }
 
 - (void)finishFlowWithRequest:(NSURLRequest *)request {

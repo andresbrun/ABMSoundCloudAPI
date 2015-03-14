@@ -18,18 +18,21 @@
 
 NSString *SC_API_URL = @"https://api.soundcloud.com";
 NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
-NSString * const SC_REDIRECT_URI = @"yourApp://oauth";
 
 @interface SoundCloudPort ()
 @property (strong, nonatomic) AFOAuth2Manager *oAuth2Manager;
 @property (strong, nonatomic) AFOAuthCredential *credentials;
 @property (strong, nonatomic) AFHTTPRequestOperation *lastOperation;
 @property (strong, nonatomic) NSURLSessionDownloadTask *lastDownloadOperation;
+
+@property (weak, nonatomic) UIViewController *supportingVC;
+@property (strong, nonatomic) NSString *redirectURL;
 @end
 
 @implementation SoundCloudPort
 
-- (instancetype)initWithClientId:(NSString *)clientID clientSecret:(NSString *)clientSecret {
+- (instancetype)initWithClientId:(NSString *)clientID
+                    clientSecret:(NSString *)clientSecret {
     self = [super init];
     if (self) {
         self.oAuth2Manager = [[AFOAuth2Manager alloc] initWithBaseURL:[NSURL URLWithString:SC_API_URL]
@@ -44,7 +47,10 @@ NSString * const SC_REDIRECT_URI = @"yourApp://oauth";
     return [AFOAuthCredential retrieveCredentialWithIdentifier:PROVIDER_IDENTIFIER];
 }
 
-- (void)loginWithResult:(void (^)(BOOL success))resultBlock usingParentVC:(UIViewController *)parentVC {
+- (void)loginWithResult:(void (^)(BOOL success))resultBlock
+          usingParentVC:(UIViewController *)parentVC
+            redirectURL:(NSString *)redirectURL {
+    self.redirectURL = redirectURL;
     self.supportingVC = parentVC;
     if([self isValidToken]) {
         resultBlock(YES);
@@ -72,7 +78,7 @@ NSString * const SC_REDIRECT_URI = @"yourApp://oauth";
 }
 
 - (void)presentSoundCloudLoginWebWithResult:(void (^)(BOOL result))resultBlock {
-    UIViewController *webContainerVC = [SoundCloudLoginWebViewController instantiateWithLoginURL:[self webURLForLogin] resultBlock:^(BOOL result, NSString *code) {
+    UIViewController *webContainerVC = [SoundCloudLoginWebViewController instantiateWithLoginURL:[self webURLForLogin] redirectURL:self.redirectURL resultBlock:^(BOOL result, NSString *code) {
         if (result) {
             [NSUserDefaults saveSoundCloudToken:code];
         }
@@ -84,11 +90,12 @@ NSString * const SC_REDIRECT_URI = @"yourApp://oauth";
 }
 
 - (NSString *)webURLForLogin {
-    return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&redirect_uri=%@&response_type=code",self.oAuth2Manager.clientID,SC_REDIRECT_URI];
+    return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientID];
 }
 
-- (void)getCredentialsForCode:(NSString *)code withResult:(void (^)(BOOL success))resultBlock {
-    self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:SC_REDIRECT_URI success:^(AFOAuthCredential *credential) {
+- (void)getCredentialsForCode:(NSString *)code
+                   withResult:(void (^)(BOOL success))resultBlock {
+    self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(AFOAuthCredential *credential) {
         [AFOAuthCredential storeCredential:credential
                             withIdentifier:PROVIDER_IDENTIFIER];
         resultBlock(YES);

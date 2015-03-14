@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Brun's Software. All rights reserved.
 //
 
-extern NSString * const SC_REDIRECT_URI;
-
 @interface SoundCloudPort : NSObject
 
-@property (weak, nonatomic) UIViewController *supportingVC;
+- (instancetype)initWithClientId:(NSString *)clientID
+                    clientSecret:(NSString *)clientSecret;
 
 - (BOOL)isValidToken;
 
 - (void)loginWithResult:(void (^)(BOOL success))resultBlock
-          usingParentVC:(UIViewController *)parentVC;
+          usingParentVC:(UIViewController *)parentVC
+            redirectURL:(NSString *)redirectURL;
 
 - (void)requestPlaylistWithID:(NSString *) playlistID
                   WithSuccess:(void (^)(NSDictionary *songsDict))successBlock

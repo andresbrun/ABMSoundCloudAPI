@@ -10,9 +10,10 @@
 
 @interface SoundCloudLoginWebViewController : UIViewController
 
-+ (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock;
++ (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL redirectURL:(NSString *)redirectURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock;
 
 @property (strong, nonatomic) NSString *scLoginURL;
+@property (strong, nonatomic) NSString *redirectURL;
 @property (copy, nonatomic) void (^resultBlock)(BOOL success, NSString *code);
 
 @end

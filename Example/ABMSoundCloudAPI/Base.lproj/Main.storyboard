@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="E7G-Z6-1IL">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Search-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController title="Search" id="vXZ-lx-hvc" customClass="ABMSearchSongsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vx0-dk-Zrz">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="5Y7-Qm-KbB"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vx0-dk-Zrz" secondAttribute="trailing" id="HSR-YV-L6k"/>
+                            <constraint firstItem="vx0-dk-Zrz" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="INB-bK-EKV"/>
+                            <constraint firstItem="vx0-dk-Zrz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="cT7-qh-v8A"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="kqT-A4-diE"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="OU7-KF-f5s" id="zS6-2Y-zNI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="OU7-KF-f5s">
+                    <connections>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="xKK-BO-uih"/>
+                        <outlet property="searchBar" destination="vx0-dk-Zrz" id="PBM-1A-BeL"/>
+                        <outlet property="searchContentsController" destination="vXZ-lx-hvc" id="j9b-1a-GzN"/>
+                        <outlet property="searchResultsDataSource" destination="vXZ-lx-hvc" id="RVs-zq-e2m"/>
+                        <outlet property="searchResultsDelegate" destination="vXZ-lx-hvc" id="pKZ-DI-VLV"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1792" y="505"/>
+        </scene>
+        <!--Playlists-->
+        <scene sceneID="mIM-Xd-tVX">
+            <objects>
+                <tableViewController id="dDf-2n-bjE" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mkS-6b-BZO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cEG-UM-tzG">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cEG-UM-tzG" id="w8s-hF-dBj">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dDf-2n-bjE" id="I6P-qt-DrY"/>
+                            <outlet property="delegate" destination="dDf-2n-bjE" id="aqU-1Z-QzC"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Playlists" id="LXN-Un-FZg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5h-na-7ng" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792" y="1258"/>
+        </scene>
+        <!--Connect View Controller-->
+        <scene sceneID="3aB-6M-s3W">
+            <objects>
+                <viewController id="XnR-8S-YO6" customClass="ABMConnectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AtE-8w-JbW"/>
+                        <viewControllerLayoutGuide type="bottom" id="2wE-1J-Hf5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fPg-k1-osp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In order to connect with SoundCloud you need to create an account and provide Client ID, Secret key and your App redirect URL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aes-6Z-mw5">
+                                <rect key="frame" x="16" y="28" width="568" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="136" id="Vw7-MI-3im"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Vw7-MI-3im"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyU-SR-Tdl">
+                                <rect key="frame" x="207" y="139" width="184" height="143"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Client ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0u-ce-OhZ">
+                                        <rect key="frame" x="3" y="0.0" width="181" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Secret Key" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jm2-zo-jLL">
+                                        <rect key="frame" x="3" y="38" width="181" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-RJ-mo4">
+                                        <rect key="frame" x="3" y="113" width="181" height="30"/>
+                                        <state key="normal" title="Connect with SoundCloud">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="connectButtonPressed:" destination="XnR-8S-YO6" eventType="touchUpInside" id="n4g-0w-ari"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Redirect URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OSl-CI-exz">
+                                        <rect key="frame" x="3" y="76" width="181" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="143" id="9Yb-nO-euu"/>
+                                    <constraint firstAttribute="width" constant="184" id="DWn-f8-AUE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="wyU-SR-Tdl" secondAttribute="centerX" constant="1" id="LUz-Nb-A4F"/>
+                            <constraint firstItem="Aes-6Z-mw5" firstAttribute="leading" secondItem="fPg-k1-osp" secondAttribute="leadingMargin" id="Lc0-wa-8dF"/>
+                            <constraint firstItem="Aes-6Z-mw5" firstAttribute="top" secondItem="AtE-8w-JbW" secondAttribute="bottom" constant="8" id="TR4-fr-IdI"/>
+                            <constraint firstItem="Aes-6Z-mw5" firstAttribute="trailing" secondItem="fPg-k1-osp" secondAttribute="trailingMargin" id="XDc-fb-RXH"/>
+                            <constraint firstAttribute="centerY" secondItem="wyU-SR-Tdl" secondAttribute="centerY" multiplier="10:7" id="rti-lZ-6qw"/>
+                            <constraint firstItem="wyU-SR-Tdl" firstAttribute="top" secondItem="Aes-6Z-mw5" secondAttribute="bottom" constant="8" id="wrF-Kj-faW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="clientIDTextField" destination="b0u-ce-OhZ" id="ENn-NQ-2qF"/>
+                        <outlet property="redirectURLTextField" destination="OSl-CI-exz" id="V1I-sr-mBU"/>
+                        <outlet property="secretKeyTextField" destination="Jm2-zo-jLL" id="swc-oH-rOd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ej-7a-jl9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="1258"/>
+        </scene>
+        <!--Main Tab Bar View Controller-->
+        <scene sceneID="J8L-c2-Wwv">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="E7G-Z6-1IL" customClass="ABMMainTabBarViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Obp-Zx-wCQ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="mru-bK-5jV"/>
+                        <segue destination="dDf-2n-bjE" kind="relationship" relationship="viewControllers" id="haI-xc-y6H"/>
+                        <segue destination="XnR-8S-YO6" kind="presentation" identifier="presentConnectView" id="kHw-Km-wMj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4G1-vM-BIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="505"/>
+        </scene>
+    </scenes>
+</document>
