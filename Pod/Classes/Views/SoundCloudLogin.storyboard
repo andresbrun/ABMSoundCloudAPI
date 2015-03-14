@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Stg-gj-G3q">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="MpR-l2-CHm">
+            <objects>
+                <navigationController id="Stg-gj-G3q" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aM4-KW-xO1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="H7f-lg-8z1" kind="relationship" relationship="rootViewController" id="eIK-X6-7nD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PQE-1W-ctE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96" y="334"/>
+        </scene>
+        <!--SoundCloud-->
+        <scene sceneID="IpE-2V-Kam">
+            <objects>
+                <viewController title="SoundCloud" id="H7f-lg-8z1" customClass="SoundCloudLoginWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tOk-AC-ZWC"/>
+                        <viewControllerLayoutGuide type="bottom" id="pRd-aI-kgQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ukk-mK-pTu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3O-bm-uPt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="H7f-lg-8z1" id="dOb-9k-BYL"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I3O-bm-uPt" firstAttribute="leading" secondItem="ukk-mK-pTu" secondAttribute="leading" id="D8G-Sl-bpq"/>
+                            <constraint firstAttribute="trailing" secondItem="I3O-bm-uPt" secondAttribute="trailing" id="st6-f4-ON8"/>
+                            <constraint firstItem="pRd-aI-kgQ" firstAttribute="top" secondItem="I3O-bm-uPt" secondAttribute="bottom" id="tug-pO-f3t"/>
+                            <constraint firstItem="I3O-bm-uPt" firstAttribute="top" secondItem="ukk-mK-pTu" secondAttribute="top" id="wEO-cC-g2k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="SoundCloud" id="6n7-pz-C7O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="i9j-ot-sKy">
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="H7f-lg-8z1" id="DQX-Nw-lcH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webViewContainer" destination="I3O-bm-uPt" id="gH5-7p-0SY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ij-4F-iix" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="835" y="334"/>
+        </scene>
+    </scenes>
+</document>
