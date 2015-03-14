@@ -26,6 +26,8 @@
 		DDBD1A871AB4693700BF136C /* ABMConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A861AB4693700BF136C /* ABMConnectViewController.m */; };
 		DDBD1A8A1AB470CC00BF136C /* ABMSearchSongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */; };
 		DDBD1A8D1AB47E3900BF136C /* ABMSongDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */; };
+		DDBD1A901AB49D8800BF136C /* ABMPlayListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A8F1AB49D8800BF136C /* ABMPlayListsViewController.m */; };
+		DDBD1A931AB49E2000BF136C /* ABMPlayListSongsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A921AB49E2000BF136C /* ABMPlayListSongsTableViewController.m */; };
 		E47FCD39D7F9B537AE7DB657 /* libPods-ABMSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F78B6A39650511A3117E45 /* libPods-ABMSoundCloudAPI.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,10 @@
 		DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMSearchSongsViewController.m; sourceTree = "<group>"; };
 		DDBD1A8B1AB47E3900BF136C /* ABMSongDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMSongDetailViewController.h; sourceTree = "<group>"; };
 		DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMSongDetailViewController.m; sourceTree = "<group>"; };
+		DDBD1A8E1AB49D8800BF136C /* ABMPlayListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMPlayListsViewController.h; sourceTree = "<group>"; };
+		DDBD1A8F1AB49D8800BF136C /* ABMPlayListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMPlayListsViewController.m; sourceTree = "<group>"; };
+		DDBD1A911AB49E2000BF136C /* ABMPlayListSongsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMPlayListSongsTableViewController.h; sourceTree = "<group>"; };
+		DDBD1A921AB49E2000BF136C /* ABMPlayListSongsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMPlayListSongsTableViewController.m; sourceTree = "<group>"; };
 		F4721E495E4FD9F508149A15 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +221,10 @@
 				DDBD1A891AB470CC00BF136C /* ABMSearchSongsViewController.m */,
 				DDBD1A8B1AB47E3900BF136C /* ABMSongDetailViewController.h */,
 				DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */,
+				DDBD1A8E1AB49D8800BF136C /* ABMPlayListsViewController.h */,
+				DDBD1A8F1AB49D8800BF136C /* ABMPlayListsViewController.m */,
+				DDBD1A911AB49E2000BF136C /* ABMPlayListSongsTableViewController.h */,
+				DDBD1A921AB49E2000BF136C /* ABMPlayListSongsTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -396,6 +406,8 @@
 				DDBD1A8A1AB470CC00BF136C /* ABMSearchSongsViewController.m in Sources */,
 				6003F59E195388D20070C39A /* ABMAppDelegate.m in Sources */,
 				DDBD1A7D1AB4664200BF136C /* ABMMainTabBarViewController.m in Sources */,
+				DDBD1A931AB49E2000BF136C /* ABMPlayListSongsTableViewController.m in Sources */,
+				DDBD1A901AB49D8800BF136C /* ABMPlayListsViewController.m in Sources */,
 				DDBD1A871AB4693700BF136C /* ABMConnectViewController.m in Sources */,
 				DDBD1A8D1AB47E3900BF136C /* ABMSongDetailViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

@@ -106,8 +106,24 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     }];
 }
 
+- (void)requestPlaylistsWithSuccess:(void (^)(NSArray *playlists))successBlock
+                            failure:(void (^)(NSError *error))failureBlock {
+    NSString *path = @"/me/playlists";
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+    
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            successBlock(responseObject);
+        } else {
+            failureBlock([NSError createParsingError]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failureBlock(error);
+    }];
+}
+
 - (void)requestPlaylistWithID:(NSString *) playlistID
-                  WithSuccess:(void (^)(NSDictionary *songsDict))successBlock
+                  withSuccess:(void (^)(NSDictionary *songsDict))successBlock
                       failure:(void (^)(NSError *error))failureBlock {
     NSString *path = [NSString stringWithFormat:@"/playlists/%@.json", playlistID];
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
