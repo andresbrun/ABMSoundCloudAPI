@@ -29,12 +29,13 @@
    }];
 }
 
-# pragma mark - NAvigation
+# pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[ABMSongDetailViewController class]]) {
         [(ABMSongDetailViewController *)segue.destinationViewController setSongDictionary:sender];
     }
 }
+
 #pragma mark - Search Bar
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 }
@@ -81,7 +82,15 @@
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *songDictionary = [self.songsList objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"presentSong" sender:songDictionary];
+    
+    NSString *type = songDictionary[@"kind"];
+    if ([type isEqualToString:@"track"]) {
+        [self performSegueWithIdentifier:@"presentSong" sender:songDictionary];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Limitation"
+                                    message:[NSString stringWithFormat:@"Details for %@ type not supported yet", type]
+                                   delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+    }
     
     return NO;
 }

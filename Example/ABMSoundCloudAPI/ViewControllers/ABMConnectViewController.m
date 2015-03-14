@@ -17,21 +17,25 @@
 
 @implementation ABMConnectViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
-#warning REMOVE THIS
-    [self.clientIDTextField setText:@"2c6da81d3f014254d3358bccd00f341a"];
-    [self.secretKeyTextField setText:@"2bb216a627a0722a4e7244682f243706"];
-    [self.redirectURLTextField setText:@"drummerboy://oauth"];
+    if ([self retrieveConfigurationData]) {
+        [self authenticate];
+    }
 }
 
 - (IBAction)connectButtonPressed:(id)sender {
+    [self authenticate];
+}
+
+- (void) authenticate {
     [[ABMSoundCloudAPISingleton sharedManager] setClientID:self.clientIDTextField.text secretKey:self.secretKeyTextField.text];
     
     __weak typeof(self) weakSelf = self;
     [[[ABMSoundCloudAPISingleton  sharedManager] soundCloudPort] loginWithResult:^(BOOL success) {
         if (success) {
+            [weakSelf saveConfigurationData];
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
         } else {
             [weakSelf showErrorAlert];
@@ -41,6 +45,21 @@
 
 - (void)showErrorAlert {
     [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot authenticate with current data." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+}
+
+- (void) saveConfigurationData {
+    [[NSUserDefaults standardUserDefaults] setValue:self.clientIDTextField.text forKey:@"ClientID"];
+    [[NSUserDefaults standardUserDefaults] setValue:self.secretKeyTextField.text forKey:@"SecretKey"];
+    [[NSUserDefaults standardUserDefaults] setValue:self.redirectURLTextField.text forKey:@"RedirectURL"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL) retrieveConfigurationData {
+    [self.clientIDTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"ClientID"]];
+    [self.secretKeyTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"SecretKey"]];
+    [self.redirectURLTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"RedirectURL"]];
+    
+    return self.clientIDTextField.text.length>0 && self.secretKeyTextField.text.length>0 && self.redirectURLTextField.text.length>0;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ABMPlayListSongsTableViewController.h"
+#import "ABMSongDetailViewController.h"
 
 @interface ABMPlayListSongsTableViewController ()
 
@@ -14,8 +15,16 @@
 
 @implementation ABMPlayListSongsTableViewController
 
-#pragma mark - Table view data source
+# pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[ABMSongDetailViewController class]]) {
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:sender];
+        NSDictionary *songDict = self.playListDict[@"tracks"][selectedIndexPath.row];
+        [(ABMSongDetailViewController *)segue.destinationViewController setSongDictionary:songDict];
+    }
+}
 
+#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

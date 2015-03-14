@@ -149,7 +149,7 @@
         <scene sceneID="7Vd-9h-qM5">
             <objects>
                 <tableViewController id="lMf-3J-UQt" customClass="ABMPlayListSongsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zQb-TA-3me">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zQb-TA-3me">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -173,6 +173,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="D9b-rD-G1r" kind="show" id="Mcy-k7-Guf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -212,20 +215,25 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyU-SR-Tdl">
-                                <rect key="frame" x="207" y="139" width="184" height="143"/>
+                                <rect key="frame" x="16" y="139" width="568" height="143"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Client ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0u-ce-OhZ">
-                                        <rect key="frame" x="3" y="0.0" width="181" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Client ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0u-ce-OhZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Secret Key" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jm2-zo-jLL">
-                                        <rect key="frame" x="3" y="38" width="181" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Secret Key" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jm2-zo-jLL">
+                                        <rect key="frame" x="0.0" y="38" width="568" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-RJ-mo4">
-                                        <rect key="frame" x="3" y="113" width="181" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Redirect URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OSl-CI-exz">
+                                        <rect key="frame" x="0.0" y="76" width="568" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJA-RJ-mo4">
+                                        <rect key="frame" x="0.0" y="113" width="568" height="30"/>
                                         <state key="normal" title="Connect with SoundCloud">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -233,28 +241,48 @@
                                             <action selector="connectButtonPressed:" destination="XnR-8S-YO6" eventType="touchUpInside" id="n4g-0w-ari"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Redirect URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OSl-CI-exz">
-                                        <rect key="frame" x="3" y="76" width="181" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="b0u-ce-OhZ" firstAttribute="top" secondItem="wyU-SR-Tdl" secondAttribute="top" id="4BY-Xu-HDd"/>
+                                    <constraint firstItem="b0u-ce-OhZ" firstAttribute="leading" secondItem="wyU-SR-Tdl" secondAttribute="leading" id="9ET-RP-eNB"/>
                                     <constraint firstAttribute="height" constant="143" id="9Yb-nO-euu"/>
+                                    <constraint firstItem="OSl-CI-exz" firstAttribute="top" secondItem="Jm2-zo-jLL" secondAttribute="bottom" constant="8" id="Al4-MO-zKe"/>
+                                    <constraint firstItem="Jm2-zo-jLL" firstAttribute="leading" secondItem="wyU-SR-Tdl" secondAttribute="leading" id="BCW-yT-FHG"/>
+                                    <constraint firstAttribute="trailing" secondItem="fJA-RJ-mo4" secondAttribute="trailing" id="CNC-j8-x6r"/>
+                                    <constraint firstItem="Jm2-zo-jLL" firstAttribute="top" secondItem="b0u-ce-OhZ" secondAttribute="bottom" constant="8" id="DEx-AL-2kc"/>
                                     <constraint firstAttribute="width" constant="184" id="DWn-f8-AUE"/>
+                                    <constraint firstItem="OSl-CI-exz" firstAttribute="leading" secondItem="wyU-SR-Tdl" secondAttribute="leading" id="Rzr-pn-2D2"/>
+                                    <constraint firstItem="fJA-RJ-mo4" firstAttribute="top" secondItem="OSl-CI-exz" secondAttribute="bottom" constant="7" id="bcM-XS-FIs"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jm2-zo-jLL" secondAttribute="trailing" id="fTe-ii-DpM"/>
+                                    <constraint firstAttribute="trailing" secondItem="OSl-CI-exz" secondAttribute="trailing" id="gdN-ME-34l"/>
+                                    <constraint firstItem="fJA-RJ-mo4" firstAttribute="leading" secondItem="wyU-SR-Tdl" secondAttribute="leading" id="lIZ-cY-JpS"/>
+                                    <constraint firstAttribute="trailing" secondItem="b0u-ce-OhZ" secondAttribute="trailing" id="sj2-yP-WqF"/>
+                                    <constraint firstAttribute="bottom" secondItem="fJA-RJ-mo4" secondAttribute="bottom" id="wed-Wl-Kau"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DWn-f8-AUE"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="wyU-SR-Tdl" secondAttribute="centerX" constant="1" id="LUz-Nb-A4F"/>
+                            <constraint firstItem="wyU-SR-Tdl" firstAttribute="leading" secondItem="fPg-k1-osp" secondAttribute="leadingMargin" id="JAU-Z9-exx"/>
+                            <constraint firstAttribute="centerX" secondItem="wyU-SR-Tdl" secondAttribute="centerX" id="LUz-Nb-A4F"/>
                             <constraint firstItem="Aes-6Z-mw5" firstAttribute="leading" secondItem="fPg-k1-osp" secondAttribute="leadingMargin" id="Lc0-wa-8dF"/>
                             <constraint firstItem="Aes-6Z-mw5" firstAttribute="top" secondItem="AtE-8w-JbW" secondAttribute="bottom" constant="8" id="TR4-fr-IdI"/>
                             <constraint firstItem="Aes-6Z-mw5" firstAttribute="trailing" secondItem="fPg-k1-osp" secondAttribute="trailingMargin" id="XDc-fb-RXH"/>
                             <constraint firstAttribute="centerY" secondItem="wyU-SR-Tdl" secondAttribute="centerY" multiplier="10:7" id="rti-lZ-6qw"/>
                             <constraint firstItem="wyU-SR-Tdl" firstAttribute="top" secondItem="Aes-6Z-mw5" secondAttribute="bottom" constant="8" id="wrF-Kj-faW"/>
+                            <constraint firstItem="wyU-SR-Tdl" firstAttribute="trailing" secondItem="fPg-k1-osp" secondAttribute="trailingMargin" id="zTQ-Lp-vxL"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="LUz-Nb-A4F"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="clientIDTextField" destination="b0u-ce-OhZ" id="ENn-NQ-2qF"/>
@@ -309,7 +337,7 @@
         <scene sceneID="fcx-aW-oF9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aR6-GQ-gK5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playlists" id="LXN-Un-FZg"/>
+                    <tabBarItem key="tabBarItem" title="Playlists" image="playlist_icon" id="LXN-Un-FZg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LUH-gd-tLg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -325,4 +353,10 @@
             <point key="canvasLocation" x="1792" y="1258"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="playlist_icon" width="42" height="43"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mcy-k7-Guf"/>
+    </inferredMetricsTieBreakers>
 </document>
