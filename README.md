@@ -1,4 +1,5 @@
-# ABMSoundCloudAPI
+
+![alt tag](https://raw.githubusercontent.com/andresbrun/ABMSoundCloudAPI/master/Example/screenshots/ABMSoundCloudAPI_logo.png)
 
 [![CI Status](http://img.shields.io/travis/Andres Brun Moreno/ABMSoundCloudAPI.svg?style=flat)](https://travis-ci.org/Andres Brun Moreno/ABMSoundCloudAPI)
 [![Version](https://img.shields.io/cocoapods/v/ABMSoundCloudAPI.svg?style=flat)](http://cocoadocs.org/docsets/ABMSoundCloudAPI)
