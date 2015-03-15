@@ -67,8 +67,13 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
             resultBlock(success);
         }];
     } else {
+        __weak typeof(self) weakSelf = self;
         [self presentSoundCloudLoginWebWithResult:^(BOOL result) {
-            resultBlock(result);
+            if (result) {
+                [weakSelf handleInvalidTokenWithResult:resultBlock];
+            } else {
+                resultBlock(result);
+            }
         }];
     }
 }
