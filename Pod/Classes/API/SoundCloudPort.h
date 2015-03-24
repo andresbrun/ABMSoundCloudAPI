@@ -33,6 +33,10 @@
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
                 failure:(void (^)(NSError *error))failureBlock;
 
+- (void)fallowUserId:(NSString *)userID
+         withSuccess:(void (^)(NSDictionary *songDict))successBlock
+             failure:(void (^)(NSError *error))failureBlock;
+
 - (void)downloadDataForSongURL:(NSString *)songStream
                         inPath:(NSString *)pathToSave
                    withSuccess:(void (^)(NSURL *path))successBlock

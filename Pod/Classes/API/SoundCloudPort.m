@@ -60,7 +60,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 }
 
 - (void)handleInvalidTokenWithResult:(void (^)(BOOL success))resultBlock {
-    // Check is token doesn't even exist
+    // Check if token doesn't even exist
     NSString *codeStored = [NSUserDefaults getSoundCloudCode];
     if(codeStored) {
         [self getCredentialsForCode:codeStored withResult:^(BOOL success) {
@@ -172,6 +172,24 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
     
     self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            successBlock(responseObject);
+        } else {
+            failureBlock([NSError createParsingError]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failureBlock(error);
+    }];
+}
+
+- (void)fallowUserId:(NSString *)userID
+         withSuccess:(void (^)(NSDictionary *songDict))successBlock
+             failure:(void (^)(NSError *error))failureBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"/me/followings/%@.json", userID];
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+    
+    self.lastOperation = [self.oAuth2Manager PUT:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
