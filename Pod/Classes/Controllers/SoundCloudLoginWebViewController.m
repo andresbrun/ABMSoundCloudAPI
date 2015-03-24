@@ -7,7 +7,6 @@
 //
 
 #import "SoundCloudLoginWebViewController.h"
-#import "SoundCloudPort.h"
 
 @interface SoundCloudLoginWebViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webViewContainer;
