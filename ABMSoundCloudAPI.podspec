@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ABMSoundCloudAPI"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Own library to handle oauth2 authentication and basic operations for SoundCloud API."
   s.description      = <<-DESC
 Since SoundCloud decided not to maintain any longer its library for iOS I diceded to create my own one. Right now it is supported:
@@ -11,6 +11,7 @@ Since SoundCloud decided not to maintain any longer its library for iOS I dicede
 * Get User Playlists
 * Get Playlists given playlist ID
 * Get song info given song ID
+* Fallow user given user ID
                        DESC
   s.homepage         = "https://github.com/andresbrun/ABMSoundCloudAPI"
   s.screenshots      = "https://raw.githubusercontent.com/andresbrun/ABMSoundCloudAPI/master/Example/screenshots/screenshot_1.png",
