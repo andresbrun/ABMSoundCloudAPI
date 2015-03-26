@@ -15,7 +15,7 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
 * Get User Playlists.
 * Get Playlists given playlist ID.
 * Get song info given song ID.
-* Fallow user given user ID.
+* Follow user given user ID.
 
 ## Usage
 

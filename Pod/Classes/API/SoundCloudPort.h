@@ -33,7 +33,7 @@
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
                 failure:(void (^)(NSError *error))failureBlock;
 
-- (void)fallowUserId:(NSString *)userID
+- (void)followUserId:(NSString *)userID
          withSuccess:(void (^)(NSDictionary *songDict))successBlock
              failure:(void (^)(NSError *error))failureBlock;
 

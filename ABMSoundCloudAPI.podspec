@@ -11,7 +11,7 @@ Since SoundCloud decided not to maintain any longer its library for iOS I dicede
 * Get User Playlists
 * Get Playlists given playlist ID
 * Get song info given song ID
-* Fallow user given user ID
+* Follow user given user ID
                        DESC
   s.homepage         = "https://github.com/andresbrun/ABMSoundCloudAPI"
   s.screenshots      = "https://raw.githubusercontent.com/andresbrun/ABMSoundCloudAPI/master/Example/screenshots/screenshot_1.png",
