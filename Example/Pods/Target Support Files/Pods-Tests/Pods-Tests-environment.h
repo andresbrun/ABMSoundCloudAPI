@@ -12,23 +12,11 @@
 #define COCOAPODS_VERSION_MINOR_ABMSoundCloudAPI 1
 #define COCOAPODS_VERSION_PATCH_ABMSoundCloudAPI 1
 
-// AFNetworking
-#define COCOAPODS_POD_AVAILABLE_AFNetworking
-#define COCOAPODS_VERSION_MAJOR_AFNetworking 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking 5
-#define COCOAPODS_VERSION_PATCH_AFNetworking 2
-
 // AFNetworking/NSURLConnection
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLConnection
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLConnection 2
 #define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLConnection 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLConnection 2
-
-// AFNetworking/NSURLSession
-#define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLSession
-#define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLSession 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLSession 5
-#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLSession 2
 
 // AFNetworking/Reachability
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_Reachability
@@ -47,12 +35,6 @@
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_Serialization 2
 #define COCOAPODS_VERSION_MINOR_AFNetworking_Serialization 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_Serialization 2
-
-// AFNetworking/UIKit
-#define COCOAPODS_POD_AVAILABLE_AFNetworking_UIKit
-#define COCOAPODS_VERSION_MAJOR_AFNetworking_UIKit 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
-#define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 2
 
 // AFOAuth2Manager
 #define COCOAPODS_POD_AVAILABLE_AFOAuth2Manager

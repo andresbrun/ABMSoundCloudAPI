@@ -9,7 +9,7 @@
 #import "SoundCloudPort.h"
 
 #import <AFOAuth2Manager/AFOAuth2Manager.h>
-#import <AFNetworking/AFNetworking.h>
+//#import <AFNetworking/AFNetworking.h>
 
 #import "NSError+APISoundCloud.h"
 #import "NSUserDefaults+soundCloudToken.h"
@@ -200,34 +200,34 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     }];
 }
 
-- (void)downloadDataForSongURL:(NSString *)songStream
-                        inPath:(NSString *)pathToSave
-                   withSuccess:(void (^)(NSURL *path))successBlock
-                       failure:(void (^)(NSError *error))failureBlock
-                      progress:(void (^)(CGFloat progress))progressBlock {
-
-    NSString *urlString = [songStream stringByAppendingString:[NSString stringWithFormat:@"?oauth_token=%@", self.credentials.accessToken]];
-    NSURL *url = [NSURL URLWithString: urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    self.lastDownloadOperation = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        return [NSURL fileURLWithPath:pathToSave isDirectory:NO];
-    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        if (error) {
-            failureBlock(error);
-        } else {
-            successBlock(filePath);
-        }
-    }];
-    
-    [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
-        progressBlock(totalBytesWritten/(totalBytesExpectedToWrite*1.0));
-    }];
-    
-    [self.lastDownloadOperation resume];
-}
+//- (void)downloadDataForSongURL:(NSString *)songStream
+//                        inPath:(NSString *)pathToSave
+//                   withSuccess:(void (^)(NSURL *path))successBlock
+//                       failure:(void (^)(NSError *error))failureBlock
+//                      progress:(void (^)(CGFloat progress))progressBlock {
+//
+//    NSString *urlString = [songStream stringByAppendingString:[NSString stringWithFormat:@"?oauth_token=%@", self.credentials.accessToken]];
+//    NSURL *url = [NSURL URLWithString: urlString];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    
+//    self.lastDownloadOperation = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+//        return [NSURL fileURLWithPath:pathToSave isDirectory:NO];
+//    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//        if (error) {
+//            failureBlock(error);
+//        } else {
+//            successBlock(filePath);
+//        }
+//    }];
+//    
+//    [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+//        progressBlock(totalBytesWritten/(totalBytesExpectedToWrite*1.0));
+//    }];
+//    
+//    [self.lastDownloadOperation resume];
+//}
 
 - (void)cancelLastOperation {
     [self.lastOperation cancel];
