@@ -51,7 +51,10 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 - (instancetype)initWithClientId:(NSString *)clientID
                     clientSecret:(NSString *)clientSecret {
-    self = [super init];
+	[NSUserDefaults removeSoundCloudCode];
+	[AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+
+	self = [super init];
     if (self) {
 		_abmAuth2Manager = [ABMAuth2Manager new];
 		[self.abmAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];

@@ -73,8 +73,7 @@ static NSString * AMBPercentEscapedQueryStringKeyFromStringWithEncoding(NSString
 		
 		// This will set all requests to only accept JSON responses.
 		[sessionConfig setHTTPAdditionalHeaders:
-		 @{@"Accept": @"application/json",
-		   
+		 @{@"Accept"			: @"application/json",
 		   }
 		 ];
 
@@ -88,12 +87,6 @@ static NSString * AMBPercentEscapedQueryStringKeyFromStringWithEncoding(NSString
 	
 	return self;
 }
-
-//#pragma mark - session
-//-(NSURLSession *)session
-//{
-//	return [NSURLSession sharedSession];
-//}
 
 #pragma mark - Authenticate
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
@@ -391,18 +384,22 @@ static NSString * AMBPercentEscapedQueryStringKeyFromStringWithEncoding(NSString
 
 	if (parameters)
 	{
-		[mutableURLRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
 		switch (HTTPMethodType)
 		{
 			case ABMAuth2Manager_HTTPMethodType_POST:
 				[self applyParameters:parameters toHTTPBodyOfRequest:mutableURLRequest];
+				[mutableURLRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 				break;
 
 			case ABMAuth2Manager_HTTPMethodType_GET:
+				[mutableURLRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 				break;
 		}
 	}
+
+	[self.session.configuration.HTTPAdditionalHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[mutableURLRequest setValue:obj forHTTPHeaderField:key];
+	}];
 
 	return mutableURLRequest;
 }
