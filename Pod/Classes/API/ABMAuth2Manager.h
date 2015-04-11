@@ -42,10 +42,4 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 
 //+(ABMAuth2Manager*)abm_sharedAuth2Manager;
 
-#pragma mark - Credentials
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
-		 withIdentifier:(NSString *)identifier;
-
-+ (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
-
 @end

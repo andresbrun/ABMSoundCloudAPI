@@ -8,6 +8,7 @@
 
 #import "ABMSoundCloudPort.h"
 #import "ABMAuth2Manager.h"
+#import "ABMAuthenticationCredentials.h"
 
 #import <AFOAuth2Manager/AFOAuth2Manager.h>
 //#import <AFNetworking/AFNetworking.h>
@@ -129,7 +130,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
                    withResult:(void (^)(BOOL success))resultBlock {
 	self.lastURLSessionDataTask = [self.abmAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(ABMAuthenticationCredentials *credentials) {
 
-		[ABMAuth2Manager storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
+		[ABMAuthenticationCredentials storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
 
 		resultBlock(YES);
 

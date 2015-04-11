@@ -9,8 +9,6 @@
 #import "ABMAuth2Manager.h"
 #import "ABMAuthenticationCredentials.h"
 
-#import <Security/Security.h>
-
 
 
 
@@ -72,16 +70,6 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	return [NSError errorWithDomain:kABMOAuth2ErrorDomain code:-1 userInfo:mutableUserInfo];
 }
 
-static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identifier) {
-	NSCParameterAssert(identifier);
-	
-	return @{
-			 (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-			 (__bridge id)kSecAttrService: kABMOAuth2CredentialServiceName,
-			 (__bridge id)kSecAttrAccount: identifier
-    };
-}
-
 
 
 
@@ -109,12 +97,6 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 +(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
-
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials *)credential
-		 withIdentifier:(NSString *)identifier
-	  withAccessibility:(id)securityAccessibility;
-
-+ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier;
 
 @end
 
@@ -457,84 +439,6 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 
 	NSAssert(false, @"unhandled");
 	return nil;
-}
-
-#pragma mark - Credentials
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
-		 withIdentifier:(NSString *)identifier
-{
-	id securityAccessibility = nil;
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 43000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
-	if (&kSecAttrAccessibleWhenUnlocked != NULL) {
-		securityAccessibility = (__bridge id)kSecAttrAccessibleWhenUnlocked;
-	}
-#endif
-	
-	return [[self class] storeCredential:credential withIdentifier:identifier withAccessibility:securityAccessibility];
-}
-
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials *)credential
-		 withIdentifier:(NSString *)identifier
-	  withAccessibility:(id)securityAccessibility
-{
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
-	
-	if (!credential) {
-		return [self deleteCredentialWithIdentifier:identifier];
-	}
-	
-	NSMutableDictionary *updateDictionary = [NSMutableDictionary dictionary];
-	updateDictionary[(__bridge id)kSecValueData] = [NSKeyedArchiver archivedDataWithRootObject:credential];
-	
-	if (securityAccessibility) {
-		updateDictionary[(__bridge id)kSecAttrAccessible] = securityAccessibility;
-	}
-	
-	OSStatus status;
-	BOOL exists = ([self retrieveCredentialWithIdentifier:identifier] != nil);
-	
-	if (exists) {
-		status = SecItemUpdate((__bridge CFDictionaryRef)queryDictionary, (__bridge CFDictionaryRef)updateDictionary);
-	} else {
-		[queryDictionary addEntriesFromDictionary:updateDictionary];
-		status = SecItemAdd((__bridge CFDictionaryRef)queryDictionary, NULL);
-	}
-	
-	if (status != errSecSuccess) {
-		NSLog(@"Unable to %@ credential with identifier \"%@\" (Error %li)", exists ? @"update" : @"add", identifier, (long int)status);
-	}
-	
-	return (status == errSecSuccess);
-}
-
-+ (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier
-{
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
-	
-	OSStatus status = SecItemDelete((__bridge CFDictionaryRef)queryDictionary);
-	
-	if (status != errSecSuccess) {
-		NSLog(@"Unable to delete credential with identifier \"%@\" (Error %li)", identifier, (long int)status);
-	}
-	
-	return (status == errSecSuccess);
-}
-
-+ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier
-{
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
-	queryDictionary[(__bridge id)kSecReturnData] = (__bridge id)kCFBooleanTrue;
-	queryDictionary[(__bridge id)kSecMatchLimit] = (__bridge id)kSecMatchLimitOne;
-	
-	CFDataRef result = nil;
-	OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)queryDictionary, (CFTypeRef *)&result);
-	
-	if (status != errSecSuccess) {
-		NSLog(@"Unable to fetch credential with identifier \"%@\" (Error %li)", identifier, (long int)status);
-		return nil;
-	}
-	
-	return [NSKeyedUnarchiver unarchiveObjectWithData:(__bridge_transfer NSData *)result];
 }
 
 @end

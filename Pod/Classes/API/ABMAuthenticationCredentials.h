@@ -42,4 +42,10 @@
 - (id)initWithOAuthToken:(NSString *)token
 			   tokenType:(NSString *)type;
 
+#pragma mark - Storing
++ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
+		 withIdentifier:(NSString *)identifier;
+
++ (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
+
 @end
