@@ -127,10 +127,10 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 - (void)getCredentialsForCode:(NSString *)code
                    withResult:(void (^)(BOOL success))resultBlock {
-	self.lastURLSessionDataTask = [self.abmAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(NSDictionary *jsonResponse) {
+	self.lastURLSessionDataTask = [self.abmAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(ABMAuthenticationCredentials *credentials) {
 
-		NSLog(@"**** jsonResponse: %@",jsonResponse);
-//		[AFOAuthCredential storeCredential:credential withIdentifier:PROVIDER_IDENTIFIER];
+		[ABMAuth2Manager storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
+
 		resultBlock(YES);
 
 	} failure:^(NSError *error) {

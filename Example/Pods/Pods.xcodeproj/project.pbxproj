@@ -25,6 +25,7 @@
 		21F6FCE0FD7D3BE23F02AF45 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 316B3413CA3F4D667440846D /* AFURLResponseSerialization.h */; };
 		25F33143AF80C3A4432BBCFE /* SoundCloudLoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 491C8E6D876BF703FD61AB70 /* SoundCloudLoginWebViewController.m */; };
 		379264ABE456448073A5C69C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E63BA873A2DA6EF99189F6 /* AFURLRequestSerialization.m */; };
+		437563D91AD9E43000E8637B /* ABMAuthenticationCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 437563D81AD9E43000E8637B /* ABMAuthenticationCredentials.m */; };
 		46AAAEE64546A14AB7C68A2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE36EA23AB45BC856949988 /* Foundation.framework */; };
 		472FCD4B95FC979A208583A1 /* AFOAuth2Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02987505E24F9FA814C3DA28 /* AFOAuth2Manager.m */; };
 		4BA32B99A94608DBA7002E27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9489AE42F9733A061E10995 /* CoreGraphics.framework */; };
@@ -184,6 +185,8 @@
 		316B3413CA3F4D667440846D /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		343DDA27CBC8617A8A93DB2E /* Pods-Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3CBC0FE066587F57E3B9A195 /* Pods-ABMSoundCloudAPI-AFOAuth2Manager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ABMSoundCloudAPI-AFOAuth2Manager-dummy.m"; sourceTree = "<group>"; };
+		437563D71AD9E43000E8637B /* ABMAuthenticationCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMAuthenticationCredentials.h; sourceTree = "<group>"; };
+		437563D81AD9E43000E8637B /* ABMAuthenticationCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMAuthenticationCredentials.m; sourceTree = "<group>"; };
 		43E63BA873A2DA6EF99189F6 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		45F196CCE297F2D38E506949 /* Pods-ABMSoundCloudAPI-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ABMSoundCloudAPI-resources.sh"; sourceTree = "<group>"; };
 		491C8E6D876BF703FD61AB70 /* SoundCloudLoginWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SoundCloudLoginWebViewController.m; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 			children = (
 				B62187EBD612A6A4ABB0117C /* ABMAuth2Manager.h */,
 				91FCF982D6B544C4B6C10814 /* ABMAuth2Manager.m */,
+				437563D71AD9E43000E8637B /* ABMAuthenticationCredentials.h */,
+				437563D81AD9E43000E8637B /* ABMAuthenticationCredentials.m */,
 				5704EB19CA9592ECC31FC664 /* ABMSoundCloudPort.h */,
 				C13BAB518CF230BF04A645CB /* ABMSoundCloudPort.m */,
 			);
@@ -969,6 +974,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD75CF54802200E68B630714 /* Pods-ABMSoundCloudAPI-dummy.m in Sources */,
+				437563D91AD9E43000E8637B /* ABMAuthenticationCredentials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

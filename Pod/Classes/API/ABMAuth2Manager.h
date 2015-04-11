@@ -12,6 +12,13 @@
 
 
 
+@class ABMAuthenticationCredentials;
+
+
+
+
+
+typedef void(^abm_Auth2Manager_authenticationSuccessBlock) (ABMAuthenticationCredentials *credentials);
 typedef void(^abm_Auth2Manager_successBlock) (NSDictionary *jsonResponse);
 typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 
@@ -28,11 +35,17 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri
-													  success:(abm_Auth2Manager_successBlock)success
+													  success:(abm_Auth2Manager_authenticationSuccessBlock)success
 													  failure:(abm_Auth2Manager_failureBlock)failure;
 
 //success:(void (^)(NSDictionary *jsonResponse))success
 
 //+(ABMAuth2Manager*)abm_sharedAuth2Manager;
+
+#pragma mark - Credentials
++ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
+		 withIdentifier:(NSString *)identifier;
+
++ (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
 
 @end
