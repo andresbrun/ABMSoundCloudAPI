@@ -43,8 +43,6 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 		 withIdentifier:(NSString *)identifier
 	  withAccessibility:(id)securityAccessibility;
 
-+ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier;
-
 @end
 
 

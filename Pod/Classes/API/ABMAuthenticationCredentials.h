@@ -48,4 +48,6 @@
 
 + (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
 
++ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier;
+
 @end

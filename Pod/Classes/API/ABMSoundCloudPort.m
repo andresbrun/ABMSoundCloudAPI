@@ -10,7 +10,7 @@
 #import "ABMAuth2Manager.h"
 #import "ABMAuthenticationCredentials.h"
 
-#import <AFOAuth2Manager/AFOAuth2Manager.h>
+//#import <AFOAuth2Manager/AFOAuth2Manager.h>
 //#import <AFNetworking/AFNetworking.h>
 
 #import "NSError+APISoundCloud.h"
@@ -33,11 +33,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 @property (strong, nonatomic) ABMAuth2Manager* abmAuth2Manager;
 @property (strong, nonatomic) NSURLSessionDataTask* lastURLSessionDataTask;
-
-//@property (strong, nonatomic) AFOAuth2Manager *oAuth2Manager;
-@property (strong, nonatomic) AFOAuthCredential *credentials;
-@property (strong, nonatomic) AFHTTPRequestOperation *lastOperation;
-@property (strong, nonatomic) NSURLSessionDownloadTask *lastDownloadOperation;
+@property (nonatomic, readonly) ABMAuthenticationCredentials *credentials;
 
 @property (weak, nonatomic) UIViewController *supportingVC;
 @property (strong, nonatomic) NSString *redirectURL;
@@ -50,28 +46,28 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 @implementation ABMSoundCloudPort
 
+//+(void)initialize
+//{
+//	[NSUserDefaults removeSoundCloudCode];
+//	[ABMAuthenticationCredentials deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+//}
+
 - (instancetype)initWithClientId:(NSString *)clientID
                     clientSecret:(NSString *)clientSecret {
-	[NSUserDefaults removeSoundCloudCode];
-	[AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
-
-	self = [super init];
-    if (self) {
+	
+	if (self = [super init])
+	{
 		_abmAuth2Manager = [ABMAuth2Manager new];
 		[self.abmAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];
 		[self.abmAuth2Manager setClientId:clientID];
 		[self.abmAuth2Manager setSecret:clientSecret];
-		
-//        self.oAuth2Manager = [[AFOAuth2Manager alloc] initWithBaseURL:[NSURL URLWithString:SC_API_URL]
-//                                                             clientID:clientID
-//                                                               secret:clientSecret];
-//        self.oAuth2Manager.useHTTPBasicAuthentication = NO;
-    }
-    return self;
+	}
+	
+	return self;
 }
 
-- (AFOAuthCredential *)credentials {
-    return [AFOAuthCredential retrieveCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+- (ABMAuthenticationCredentials *)credentials {
+    return [ABMAuthenticationCredentials retrieveCredentialWithIdentifier:PROVIDER_IDENTIFIER];
 }
 
 - (void)loginWithResult:(void (^)(BOOL success))resultBlock
@@ -106,7 +102,9 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 }
 
 - (BOOL)isValidToken {
-    return self.credentials && ![self.credentials isExpired];
+	ABMAuthenticationCredentials* credentials = self.credentials;
+    return ((credentials != nil) &&
+			(![credentials isExpired]));
 }
 
 - (void)presentSoundCloudLoginWebWithResult:(void (^)(BOOL result))resultBlock {
@@ -137,7 +135,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	} failure:^(NSError *error) {
 
 		[NSUserDefaults removeSoundCloudCode];
-		[AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+		[ABMAuthenticationCredentials deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
 		resultBlock(NO);
 
 	}];
@@ -274,8 +272,8 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	[self.lastURLSessionDataTask cancel];
 	[self setLastURLSessionDataTask:nil];
 
-	[self.lastOperation cancel];
-    [self.lastDownloadOperation cancelByProducingResumeData:nil];
+//	[self.lastOperation cancel];
+//    [self.lastDownloadOperation cancelByProducingResumeData:nil];
 }
 
 @end
