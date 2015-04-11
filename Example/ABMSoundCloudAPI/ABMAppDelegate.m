@@ -8,11 +8,22 @@
 
 #import "ABMAppDelegate.h"
 
+#import "ABMSoundCloudAPISingleton.h"
+
+
+
+
+
 @implementation ABMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+	[[ABMSoundCloudAPISingleton sharedManager]setClientID:@"deb3f736ae605f99850f2cc71e9c98b8" secretKey:@"18177564efaef040303d189fa8355bfa"];
+//	[SCSoundCloud setClientID:kVWIConstants_SoundCloudClientId
+//					   secret:kVWIConstants_SoundCloud_ClientSecret
+//				  redirectURL:[NSURL URLWithString:RUStringWithFormat(@"vibewithit-%@://oauth",kVWIConstants_SoundCloudClientId)]];
+
+	// Override point for customization after application launch.
     return YES;
 }
 							

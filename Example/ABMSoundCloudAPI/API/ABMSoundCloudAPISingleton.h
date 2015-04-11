@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ABMSoundCloudAPI/SoundCloudPort.h>
+#import <ABMSoundCloudAPI/ABMSoundCloudPort.h>
 
 @interface ABMSoundCloudAPISingleton : NSObject
 
@@ -15,6 +15,6 @@
 
 - (void) setClientID:(NSString *)clientID secretKey:(NSString *)secretKey;
 
-@property (nonatomic, readonly) SoundCloudPort *soundCloudPort;
+@property (nonatomic, readonly) ABMSoundCloudPort *soundCloudPort;
 
 @end

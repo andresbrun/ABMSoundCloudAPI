@@ -19,7 +19,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     if ([self retrieveConfigurationData]) {
         [self authenticate];
     }

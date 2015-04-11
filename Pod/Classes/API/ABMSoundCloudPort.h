@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brun's Software. All rights reserved.
 //
 
-@interface SoundCloudPort : NSObject
+@interface ABMSoundCloudPort : NSObject
 
 - (instancetype)initWithClientId:(NSString *)clientID
                     clientSecret:(NSString *)clientSecret;
