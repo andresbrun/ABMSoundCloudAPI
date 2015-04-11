@@ -18,9 +18,39 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 
 
 
+typedef NS_ENUM(NSInteger, ABMAuth2Manager_HTTPMethodType) {
+	ABMAuth2Manager_HTTPMethodType_GET,
+	ABMAuth2Manager_HTTPMethodType_POST,
+};
+
+static NSString * const kAMBCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
+
+static NSString * AMBPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
+	static NSString * const kAFCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
+	
+	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescapedInQueryStringPairKey, (__bridge CFStringRef)kAMBCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
+}
+
+
+
+
 @interface ABMAuth2Manager ()
 
 @property (nonatomic, readonly) NSURLSession* session;
+
+- (NSURLSessionDataTask *)URLSessionDataTaskWithRequest:(NSURLRequest*)URLRequest
+												success:(abm_Auth2Manager_successBlock)success
+												failure:(abm_Auth2Manager_failureBlock)failure;
+
+-(void)applyParameters:(id)parameters toHTTPBodyOfRequest:(NSMutableURLRequest*)URLRequest;
+-(NSString*)URLStringWithParameters:(id)parameters withBaseURLString:(NSString*)URLString;
+-(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
+
+- (NSMutableURLRequest *)URLRequestURLString:(NSString*)URLString
+								  parameters:(id)parameters
+							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
+
++(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 @end
 
@@ -43,7 +73,10 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 		
 		// This will set all requests to only accept JSON responses.
 		[sessionConfig setHTTPAdditionalHeaders:
-		 @{@"Accept": @"application/json"}];
+		 @{@"Accept": @"application/json",
+		   
+		   }
+		 ];
 
 		[sessionConfig setTimeoutIntervalForRequest:30.0f];
 		[sessionConfig setTimeoutIntervalForResource:60.0f];
@@ -66,8 +99,8 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri
-													  success:(void (^)(NSDictionary *jsonResponse))success
-													  failure:(void (^)(NSError *error))failure
+													  success:(abm_Auth2Manager_successBlock)success
+													  failure:(abm_Auth2Manager_failureBlock)failure
 {
 	if (URLString.length == 0)
 	{
@@ -90,11 +123,14 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 	NSParameterAssert(code);
 	NSParameterAssert(uri);
 	
+//	NSString* encodedURI = [uri stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString* encodedURI = AMBPercentEscapedQueryStringKeyFromStringWithEncoding(uri, NSUTF8StringEncoding);
+
 	NSDictionary *parameters =
  @{
-   @"grant_type": kABMAuth2Manager_AuthCodeGrantType,
-   @"code": code,
-   @"redirect_uri": uri
+   @"grant_type"	: kABMAuth2Manager_AuthCodeGrantType,
+   @"code"			: code,
+   @"redirect_uri"	: encodedURI
    };
 
 	return [self authenticateUsingOAuthWithURLString:URLString parameters:parameters addAuthenticationParams:YES success:success failure:failure];
@@ -102,10 +138,10 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 
 //@TODO maybe get rid of addAuthenticationParams if it ends up used the same everywhere.
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
-													 parameters:(NSDictionary *)parameters
-										addAuthenticationParams:(BOOL)addAuthenticationParams
-														success:(void (^)(NSDictionary *jsonResponse))success
-														failure:(void (^)(NSError *error))failure
+												   parameters:(NSDictionary *)parameters
+									  addAuthenticationParams:(BOOL)addAuthenticationParams
+													  success:(abm_Auth2Manager_successBlock)success
+													  failure:(abm_Auth2Manager_failureBlock)failure
 {
 	if (self.baseURL == nil)
 	{
@@ -134,41 +170,36 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 	}
 	parameters = [mutableParameters copy];
 
-	void (^failureCheckBlock)(NSError* error) = ^(NSError* error){
-		if (failure)
-		{
-			failure(error);
-		}
-	};
-	NSURLSessionDataTask* URLSessionDataTask = [self.session dataTaskWithURL:[NSURL URLWithString:URLString relativeToURL:self.baseURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-		if (error ||
-			(response == nil) ||
-			(data == nil))
-		{
-			failureCheckBlock(error);
-			return;
-		}
-
-		NSError* jsonParseError = nil;
-		NSDictionary* jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
-
-		if (jsonParseError)
-		{
-			failureCheckBlock(jsonParseError);
-			return;
-		}
-
-		if (success)
-		{
-			success(jsonData);
-		}
-
-	}];
-
-	[URLSessionDataTask resume];
-	return URLSessionDataTask;
-
+	return [self POST:URLString parameters:parameters success:success failure:failure];
+//	NSURLSessionDataTask* URLSessionDataTask = [self.session dataTaskWithURL:[NSURL URLWithString:URLString relativeToURL:self.baseURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//
+//		if (error ||
+//			(response == nil) ||
+//			(data == nil))
+//		{
+//			failureCheckBlock(error);
+//			return;
+//		}
+//
+//		NSError* jsonParseError = nil;
+//		NSDictionary* jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+//
+//		if (jsonParseError)
+//		{
+//			failureCheckBlock(jsonParseError);
+//			return;
+//		}
+//
+//		if (success)
+//		{
+//			success(jsonData);
+//		}
+//
+//	}];
+//
+//	[URLSessionDataTask resume];
+//	return URLSessionDataTask;
+//
 //	AFHTTPRequestOperation *requestOperation = [self POST:URLString parameters:parameters success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 //		if (!responseObject) {
 //			if (failure) {
@@ -221,6 +252,177 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 //	return requestOperation;
 }
 
+#pragma mark - Requests
+- (NSURLSessionDataTask *)URLSessionDataTaskWithRequest:(NSURLRequest*)URLRequest
+												success:(abm_Auth2Manager_successBlock)success
+												failure:(abm_Auth2Manager_failureBlock)failure
+{
+	if (self.session == nil)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+
+	if (URLRequest == nil)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+
+	void (^failureCheckBlock)(NSError* error) = ^(NSError* error){
+		if (failure)
+		{
+			failure(error);
+		}
+	};
+
+	NSURLSessionDataTask* URLSessionDataTask = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+		
+		if (error ||
+			(response == nil) ||
+			(data == nil))
+		{
+			failureCheckBlock(error);
+			return;
+		}
+		
+		NSError* jsonParseError = nil;
+		NSDictionary* jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+		
+		if (jsonParseError)
+		{
+			failureCheckBlock(jsonParseError);
+			return;
+		}
+		
+		if (success)
+		{
+			success(jsonData);
+		}
+		
+	}];
+	
+	[URLSessionDataTask resume];
+	return URLSessionDataTask;
+}
+
+-(void)applyParameters:(id)parameters toHTTPBodyOfRequest:(NSMutableURLRequest*)URLRequest
+{
+	NSError* jsonError = nil;
+	NSString* parametersString = [self URLStringWithParameters:parameters withBaseURLString:nil];
+	NSData* parameterData = [parametersString dataUsingEncoding:NSUTF8StringEncoding];
+//	NSData* parameterData = [NSJSONSerialization dataWithJSONObject:parametersString options:0 error:&jsonError];
+	
+	if (jsonError)
+	{
+		NSAssert(false, @"unhandled");
+		return;
+	}
+	
+	[URLRequest setHTTPBody:parameterData];
+}
+
+-(NSString*)URLStringWithParameters:(id)parameters withBaseURLString:(NSString*)URLString
+{
+	NSMutableString* mutableURLString = (URLString ? [URLString mutableCopy] : [NSMutableString string]);
+
+	if (parameters)
+	{
+		if ([parameters isKindOfClass:[NSDictionary class]])
+		{
+			NSDictionary* parametersDictionary = parameters;
+			[parametersDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+				
+				if (mutableURLString.length)
+				{
+					[mutableURLString appendString:@"&"];
+				}
+
+				[mutableURLString appendFormat:@"%@=%@",key,obj];
+
+			}];
+		}
+		else
+		{
+			NSAssert(false, @"unhandled");
+		}
+	}
+
+	return mutableURLString;
+}
+
+-(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+{
+	if (parameters)
+	{
+		switch (HTTPMethodType)
+		{
+			case ABMAuth2Manager_HTTPMethodType_GET:
+				URLString = [self URLStringWithParameters:parameters withBaseURLString:URLString];
+				break;
+				
+			case ABMAuth2Manager_HTTPMethodType_POST:
+				break;
+		}
+	}
+
+	return [NSURL URLWithString:URLString relativeToURL:self.baseURL];
+}
+
+- (NSMutableURLRequest *)URLRequestURLString:(NSString*)URLString
+								  parameters:(id)parameters
+							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+{
+	if (URLString.length == 0)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+	
+	NSURL *URL = [self URLWithString:URLString parameters:parameters HTTPMethodType:HTTPMethodType];
+	if (URL == nil)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+	
+	NSMutableURLRequest *mutableURLRequest = [NSMutableURLRequest requestWithURL:URL];
+	[mutableURLRequest setHTTPMethod:[[self class]requestHTTPMethodForType:HTTPMethodType]];
+
+	if (parameters)
+	{
+		[mutableURLRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+		switch (HTTPMethodType)
+		{
+			case ABMAuth2Manager_HTTPMethodType_POST:
+				[self applyParameters:parameters toHTTPBodyOfRequest:mutableURLRequest];
+				break;
+
+			case ABMAuth2Manager_HTTPMethodType_GET:
+				break;
+		}
+	}
+
+	return mutableURLRequest;
+}
+
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+					parameters:(id)parameters
+					   success:(abm_Auth2Manager_successBlock)success
+					   failure:(abm_Auth2Manager_failureBlock)failure
+{
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_POST];
+	if (request == nil)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+
+	return [self URLSessionDataTaskWithRequest:request success:success failure:failure];
+}
+
+
 //#pragma mark - Singleton
 //+(ABMAuth2Manager*)abm_sharedAuth2Manager
 //{
@@ -234,5 +436,20 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 //	}
 //	return abm_sharedAuth2Manager;
 //}
+
++(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+{
+	switch (HTTPMethodType)
+	{
+		case ABMAuth2Manager_HTTPMethodType_GET:
+			return @"GET";
+
+		case ABMAuth2Manager_HTTPMethodType_POST:
+			return @"POST";
+	}
+
+	NSAssert(false, @"unhandled");
+	return nil;
+}
 
 @end

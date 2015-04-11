@@ -12,6 +12,13 @@
 
 
 
+typedef void(^abm_Auth2Manager_successBlock) (NSDictionary *jsonResponse);
+typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
+
+
+
+
+
 @interface ABMAuth2Manager : NSObject
 
 @property (nonatomic, copy) NSString* clientId;
@@ -21,8 +28,10 @@
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri
-													  success:(void (^)(NSDictionary *jsonResponse))success
-													  failure:(void (^)(NSError *error))failure;
+													  success:(abm_Auth2Manager_successBlock)success
+													  failure:(abm_Auth2Manager_failureBlock)failure;
+
+//success:(void (^)(NSDictionary *jsonResponse))success
 
 //+(ABMAuth2Manager*)abm_sharedAuth2Manager;
 
