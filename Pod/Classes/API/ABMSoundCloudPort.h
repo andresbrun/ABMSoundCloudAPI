@@ -8,6 +8,8 @@
 
 @interface ABMSoundCloudPort : NSObject
 
+@property (nonatomic, readonly) NSString* webURLForLogin;
+
 - (instancetype)initWithClientId:(NSString *)clientID
                     clientSecret:(NSString *)clientSecret;
 

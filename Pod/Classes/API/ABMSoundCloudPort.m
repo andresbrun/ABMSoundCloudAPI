@@ -31,7 +31,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 @interface ABMSoundCloudPort ()
 
-@property (strong, nonatomic) ABMAuth2Manager* abmAuth2Manager;
+@property (strong, nonatomic) ABMAuth2Manager* oAuth2Manager;
 @property (strong, nonatomic) NSURLSessionDataTask* lastURLSessionDataTask;
 @property (nonatomic, readonly) ABMAuthenticationCredentials *credentials;
 
@@ -57,10 +57,10 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	
 	if (self = [super init])
 	{
-		_abmAuth2Manager = [ABMAuth2Manager new];
-		[self.abmAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];
-		[self.abmAuth2Manager setClientId:clientID];
-		[self.abmAuth2Manager setSecret:clientSecret];
+		_oAuth2Manager = [ABMAuth2Manager new];
+		[self.oAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];
+		[self.oAuth2Manager setClientId:clientID];
+		[self.oAuth2Manager setSecret:clientSecret];
 	}
 	
 	return self;
@@ -119,14 +119,9 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     [self.supportingVC presentViewController:webContainerVC animated:YES completion:nil];
 }
 
-- (NSString *)webURLForLogin {
-	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.abmAuth2Manager.clientId];
-//	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientID];
-}
-
 - (void)getCredentialsForCode:(NSString *)code
                    withResult:(void (^)(BOOL success))resultBlock {
-	self.lastURLSessionDataTask = [self.abmAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(ABMAuthenticationCredentials *credentials) {
+	self.lastURLSessionDataTask = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(ABMAuthenticationCredentials *credentials) {
 
 		[ABMAuthenticationCredentials storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
 
@@ -228,7 +223,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     NSString *path = [NSString stringWithFormat:@"/me/followings/%@.json", userID];
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
 
-	self.lastURLSessionDataTask = [self.abmAuth2Manager PUT:path parameters:params success:^(NSDictionary *jsonResponse) {
+	self.lastURLSessionDataTask = [self.oAuth2Manager PUT:path parameters:params success:^(NSDictionary *jsonResponse) {
         if ([jsonResponse isKindOfClass:[NSDictionary class]])
 		{
 			if (successBlock)
@@ -281,6 +276,12 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 //	[self.lastOperation cancel];
 //    [self.lastDownloadOperation cancelByProducingResumeData:nil];
+}
+
+#pragma mark - webURLForLogin
+- (NSString *)webURLForLogin {
+	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientId];
+	//	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientID];
 }
 
 @end

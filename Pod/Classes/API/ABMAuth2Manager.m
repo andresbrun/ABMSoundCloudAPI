@@ -458,6 +458,9 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 		case ABMAuth2Manager_HTTPMethodType_POST:
 			return @"POST";
+
+		case ABMAuth2Manager_HTTPMethodType_PUT:
+			return @"PUT";
 	}
 
 	NSAssert(false, @"unhandled");
