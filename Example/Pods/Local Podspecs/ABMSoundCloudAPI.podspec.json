@@ -24,10 +24,5 @@
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*.{h,m}",
-  "resources": "Pod/Classes/Views/*.storyboard",
-  "dependencies": {
-    "AFOAuth2Manager": [
-      "~> 2.2"
-    ]
-  }
+  "resources": "Pod/Classes/Views/*.storyboard"
 }

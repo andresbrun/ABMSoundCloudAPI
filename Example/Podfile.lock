@@ -1,15 +1,5 @@
 PODS:
-  - ABMSoundCloudAPI (0.1.1):
-    - AFOAuth2Manager (~> 2.2)
-  - AFNetworking/NSURLConnection (2.5.2):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.2)
-  - AFNetworking/Security (2.5.2)
-  - AFNetworking/Serialization (2.5.2)
-  - AFOAuth2Manager (2.2.0):
-    - AFNetworking/NSURLConnection (~> 2.2)
+  - ABMSoundCloudAPI (0.1.1)
 
 DEPENDENCIES:
   - ABMSoundCloudAPI (from `../`)
@@ -19,8 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ABMSoundCloudAPI: 8f0ebbaaf4f89ddb5a62962a689bb9b5f6ae6fd4
-  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
-  AFOAuth2Manager: 952eb62e8fd8022971e64c6e8fe28b9e999224af
+  ABMSoundCloudAPI: 453797ded6dbb83b52162df8b11096f6bd183ff5
 
 COCOAPODS: 0.36.1

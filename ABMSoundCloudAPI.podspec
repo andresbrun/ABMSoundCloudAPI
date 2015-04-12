@@ -31,5 +31,5 @@ Since SoundCloud decided not to maintain any longer its library for iOS I dicede
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.dependency 'AFNetworking', '~> 2.5'
-  s.dependency 'AFOAuth2Manager', '~> 2.2'
+  # s.dependency 'AFOAuth2Manager', '~> 2.2'
 end
