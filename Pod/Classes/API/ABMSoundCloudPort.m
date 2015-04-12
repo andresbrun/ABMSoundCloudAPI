@@ -225,18 +225,25 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
          withSuccess:(void (^)(NSDictionary *songDict))successBlock
              failure:(void (^)(NSError *error))failureBlock {
     
-//    NSString *path = [NSString stringWithFormat:@"/me/followings/%@.json", userID];
-//    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
-//    
-//    self.lastOperation = [self.oAuth2Manager PUT:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            successBlock(responseObject);
-//        } else {
-//            failureBlock([NSError createParsingError]);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
+    NSString *path = [NSString stringWithFormat:@"/me/followings/%@.json", userID];
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+
+	self.lastURLSessionDataTask = [self.abmAuth2Manager PUT:path parameters:params success:^(NSDictionary *jsonResponse) {
+        if ([jsonResponse isKindOfClass:[NSDictionary class]])
+		{
+			if (successBlock)
+			{
+				successBlock(jsonResponse);
+			}
+        }
+		else
+		{
+			if (failureBlock)
+			{
+				failureBlock([NSError createParsingError]);
+			}
+        }
+    } failure:failureBlock];
 }
 
 //- (void)downloadDataForSongURL:(NSString *)songStream

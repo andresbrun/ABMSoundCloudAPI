@@ -32,6 +32,18 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 @property (nonatomic, copy) NSString* secret;
 @property (nonatomic, copy) NSURL* baseURL;
 
+#pragma mark - General
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+					parameters:(id)parameters
+					   success:(abm_Auth2Manager_successBlock)success
+					   failure:(abm_Auth2Manager_failureBlock)failure;
+
+- (NSURLSessionDataTask *)PUT:(NSString *)URLString
+				   parameters:(id)parameters
+					  success:(abm_Auth2Manager_successBlock)success
+					  failure:(abm_Auth2Manager_failureBlock)failure;
+
+#pragma mark - Authentication
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri

@@ -22,6 +22,7 @@ NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
 typedef NS_ENUM(NSInteger, ABMAuth2Manager_HTTPMethodType) {
 	ABMAuth2Manager_HTTPMethodType_GET,
 	ABMAuth2Manager_HTTPMethodType_POST,
+	ABMAuth2Manager_HTTPMethodType_PUT,
 };
 
 static NSString * const kAMBCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
@@ -97,6 +98,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 +(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
++(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 @end
 
@@ -353,20 +355,28 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 -(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
 {
-	if (parameters)
+	if (parameters &&
+		([[self class]HTTPMethodTypeEncodesParametersIntoFormBody:HTTPMethodType] == false))
 	{
-		switch (HTTPMethodType)
-		{
-			case ABMAuth2Manager_HTTPMethodType_GET:
-				URLString = [self URLStringWithParameters:parameters withBaseURLString:URLString];
-				break;
-				
-			case ABMAuth2Manager_HTTPMethodType_POST:
-				break;
-		}
+		URLString = [self URLStringWithParameters:parameters withBaseURLString:URLString];
 	}
 
 	return [NSURL URLWithString:URLString relativeToURL:self.baseURL];
+}
+
++(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+{
+	switch (HTTPMethodType)
+	{
+		case ABMAuth2Manager_HTTPMethodType_POST:
+			return YES;
+			
+		case ABMAuth2Manager_HTTPMethodType_GET:
+		case ABMAuth2Manager_HTTPMethodType_PUT:
+			return NO;
+	}
+
+	NSAssert(false, @"unhandled");
 }
 
 - (NSMutableURLRequest *)URLRequestURLString:(NSString*)URLString
@@ -391,16 +401,14 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 	if (parameters)
 	{
-		switch (HTTPMethodType)
+		if ([[self class]HTTPMethodTypeEncodesParametersIntoFormBody:HTTPMethodType])
 		{
-			case ABMAuth2Manager_HTTPMethodType_POST:
-				[self applyParameters:parameters toHTTPBodyOfRequest:mutableURLRequest];
-				[mutableURLRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-				break;
-
-			case ABMAuth2Manager_HTTPMethodType_GET:
-				[mutableURLRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-				break;
+			[self applyParameters:parameters toHTTPBodyOfRequest:mutableURLRequest];
+			[mutableURLRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+		}
+		else
+		{
+			[mutableURLRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 		}
 	}
 
@@ -423,6 +431,21 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 		return nil;
 	}
 
+	return [self URLSessionDataTaskWithRequest:request success:success failure:failure];
+}
+
+- (NSURLSessionDataTask *)PUT:(NSString *)URLString
+				   parameters:(id)parameters
+					  success:(abm_Auth2Manager_successBlock)success
+					  failure:(abm_Auth2Manager_failureBlock)failure
+{
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_PUT];
+	if (request == nil)
+	{
+		NSAssert(false, @"unhandled");
+		return nil;
+	}
+	
 	return [self URLSessionDataTaskWithRequest:request success:success failure:failure];
 }
 
