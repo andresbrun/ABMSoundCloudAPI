@@ -369,10 +369,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	switch (HTTPMethodType)
 	{
 		case ABMAuth2Manager_HTTPMethodType_POST:
+		case ABMAuth2Manager_HTTPMethodType_PUT:
 			return YES;
 			
 		case ABMAuth2Manager_HTTPMethodType_GET:
-		case ABMAuth2Manager_HTTPMethodType_PUT:
 			return NO;
 	}
 
