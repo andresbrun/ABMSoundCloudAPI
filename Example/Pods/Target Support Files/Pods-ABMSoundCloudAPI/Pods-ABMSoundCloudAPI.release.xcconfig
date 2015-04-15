@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ABMSoundCloudAPI" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/AFOAuth2Manager"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ABMSoundCloudAPI" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/AFOAuth2Manager"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-ABMSoundCloudAPI-ABMSoundCloudAPI" -l"Pods-ABMSoundCloudAPI-AFNetworking" -l"Pods-ABMSoundCloudAPI-AFOAuth2Manager" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ABMSoundCloudAPI"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ABMSoundCloudAPI"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-ABMSoundCloudAPI-ABMSoundCloudAPI"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods
