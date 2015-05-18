@@ -126,15 +126,6 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 		resultBlock(NO);
 
 	}];
-//    self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(AFOAuthCredential *credential) {
-//        [AFOAuthCredential storeCredential:credential
-//                            withIdentifier:PROVIDER_IDENTIFIER];
-//        resultBlock(YES);
-//    } failure:^(NSError *error) {
-//        [NSUserDefaults removeSoundCloudCode];
-//        [AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
-//        resultBlock(NO);
-//    }];
 }
 
 - (void)requestPlaylistsWithSuccess:(void (^)(NSArray *playlists))successBlock
