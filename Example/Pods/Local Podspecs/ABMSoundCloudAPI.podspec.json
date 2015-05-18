@@ -24,5 +24,10 @@
   },
   "requires_arc": true,
   "source_files": "Pod/Classes/**/*.{h,m}",
-  "resources": "Pod/Classes/Views/*.storyboard"
+  "resources": "Pod/Classes/Views/*.storyboard",
+  "dependencies": {
+    "NSURLSession-Resplendent": [
+      "~> 0.1"
+    ]
+  }
 }

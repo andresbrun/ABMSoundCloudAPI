@@ -7,13 +7,14 @@
 //
 
 #import "SoundCloudPort.h"
-#import "ABMAuth2Manager.h"
-#import "ABMAuthenticationCredentials.h"
 
 #import "NSError+APISoundCloud.h"
 #import "NSUserDefaults+soundCloudToken.h"
 
 #import "SoundCloudLoginWebViewController.h"
+
+#import <RUAuth2Manager.h>
+#import <RUAuthenticationCredentials.h>
 
 
 
@@ -28,9 +29,9 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 @interface SoundCloudPort ()
 
-@property (strong, nonatomic) ABMAuth2Manager* oAuth2Manager;
+@property (strong, nonatomic) RUAuth2Manager* oAuth2Manager;
 @property (strong, nonatomic) NSURLSessionDataTask* lastURLSessionDataTask;
-@property (nonatomic, readonly) ABMAuthenticationCredentials *credentials;
+@property (nonatomic, readonly) RUAuthenticationCredentials *credentials;
 
 @property (weak, nonatomic) UIViewController *supportingVC;
 @property (strong, nonatomic) NSString *redirectURL;
@@ -48,7 +49,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	
 	self = [super init];
 	if (self) {
-		_oAuth2Manager = [ABMAuth2Manager new];
+		_oAuth2Manager = [RUAuth2Manager new];
 		[self.oAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];
 		[self.oAuth2Manager setClientId:clientID];
 		[self.oAuth2Manager setSecret:clientSecret];
@@ -57,8 +58,8 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	return self;
 }
 
-- (ABMAuthenticationCredentials *)credentials {
-    return [ABMAuthenticationCredentials retrieveCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+- (RUAuthenticationCredentials *)credentials {
+    return [RUAuthenticationCredentials retrieveCredentialWithIdentifier:PROVIDER_IDENTIFIER];
 }
 
 - (void)loginWithResult:(void (^)(BOOL success))resultBlock
@@ -93,7 +94,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 }
 
 - (BOOL)isValidToken {
-	ABMAuthenticationCredentials* credentials = self.credentials;
+	RUAuthenticationCredentials* credentials = self.credentials;
     return ((credentials != nil) &&
 			(![credentials isExpired]));
 }
@@ -112,16 +113,16 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 - (void)getCredentialsForCode:(NSString *)code
                    withResult:(void (^)(BOOL success))resultBlock {
-	self.lastURLSessionDataTask = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(ABMAuthenticationCredentials *credentials) {
+	self.lastURLSessionDataTask = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(RUAuthenticationCredentials *credentials) {
 
-		[ABMAuthenticationCredentials storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
+		[RUAuthenticationCredentials storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
 
 		resultBlock(YES);
 
 	} failure:^(NSError *error) {
 
 		[NSUserDefaults removeSoundCloudCode];
-		[ABMAuthenticationCredentials deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+		[RUAuthenticationCredentials deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
 		resultBlock(NO);
 
 	}];

@@ -6,7 +6,7 @@
 //
 //
 
-#import "ABMAuthenticationCredentials.h"
+#import "RUAuthenticationCredentials.h"
 
 #import <Security/Security.h>
 
@@ -34,12 +34,12 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 
 
 
-@interface ABMAuthenticationCredentials ()
+@interface RUAuthenticationCredentials ()
 
 @property (readwrite, nonatomic, copy) NSString *accessToken;
 @property (readwrite, nonatomic, copy) NSString *tokenType;
 
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials *)credential
++ (BOOL)storeCredential:(RUAuthenticationCredentials *)credential
 		 withIdentifier:(NSString *)identifier
 	  withAccessibility:(id)securityAccessibility;
 
@@ -49,7 +49,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 
 
 
-@implementation ABMAuthenticationCredentials
+@implementation RUAuthenticationCredentials
 
 #pragma mark - Contructor
 + (instancetype)credentialWithOAuthToken:(NSString *)token
@@ -94,7 +94,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 }
 
 #pragma mark - Storing
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
++ (BOOL)storeCredential:(RUAuthenticationCredentials*)credential
 		 withIdentifier:(NSString *)identifier
 {
 	id securityAccessibility = nil;
@@ -107,7 +107,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 	return [[self class] storeCredential:credential withIdentifier:identifier withAccessibility:securityAccessibility];
 }
 
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials *)credential
++ (BOOL)storeCredential:(RUAuthenticationCredentials *)credential
 		 withIdentifier:(NSString *)identifier
 	  withAccessibility:(id)securityAccessibility
 {
@@ -154,7 +154,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 	return (status == errSecSuccess);
 }
 
-+ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier
++ (RUAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier
 {
 	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
 	queryDictionary[(__bridge id)kSecReturnData] = (__bridge id)kCFBooleanTrue;

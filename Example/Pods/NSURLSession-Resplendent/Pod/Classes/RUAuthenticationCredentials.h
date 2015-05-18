@@ -12,7 +12,7 @@
 
 
 
-@interface ABMAuthenticationCredentials : NSObject
+@interface RUAuthenticationCredentials : NSObject
 
 /**
  The OAuth access token.
@@ -43,11 +43,11 @@
 			   tokenType:(NSString *)type;
 
 #pragma mark - Storing
-+ (BOOL)storeCredential:(ABMAuthenticationCredentials*)credential
++ (BOOL)storeCredential:(RUAuthenticationCredentials*)credential
 		 withIdentifier:(NSString *)identifier;
 
 + (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
 
-+ (ABMAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier;
++ (RUAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier;
 
 @end

@@ -1,5 +1,7 @@
 PODS:
-  - ABMSoundCloudAPI (0.1.1)
+  - ABMSoundCloudAPI (0.1.1):
+    - NSURLSession-Resplendent (~> 0.1)
+  - NSURLSession-Resplendent (0.1.1)
 
 DEPENDENCIES:
   - ABMSoundCloudAPI (from `../`)
@@ -9,6 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ABMSoundCloudAPI: 453797ded6dbb83b52162df8b11096f6bd183ff5
+  ABMSoundCloudAPI: dbdb089fe59628a8bbaf1d7bdfe504392202e47b
+  NSURLSession-Resplendent: 2d14ee1c8b88204aaf7ba2b9ff277bdb208afd42
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.1

@@ -12,13 +12,13 @@
 
 
 
-@class ABMAuthenticationCredentials;
+@class RUAuthenticationCredentials;
 
 
 
 
 
-typedef void(^abm_Auth2Manager_authenticationSuccessBlock) (ABMAuthenticationCredentials *credentials);
+typedef void(^abm_Auth2Manager_authenticationSuccessBlock) (RUAuthenticationCredentials *credentials);
 typedef void(^abm_Auth2Manager_successBlock) (NSDictionary *jsonResponse);
 typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 
@@ -26,7 +26,7 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 
 
 
-@interface ABMAuth2Manager : NSObject
+@interface RUAuth2Manager : NSObject
 
 @property (nonatomic, copy) NSString* clientId;
 @property (nonatomic, copy) NSString* secret;
@@ -39,6 +39,21 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 					   failure:(abm_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
+				   parameters:(id)parameters
+					  success:(abm_Auth2Manager_successBlock)success
+					  failure:(abm_Auth2Manager_failureBlock)failure;
+
+- (NSURLSessionDataTask *)GET:(NSString *)URLString
+				   parameters:(id)parameters
+					  success:(abm_Auth2Manager_successBlock)success
+					  failure:(abm_Auth2Manager_failureBlock)failure;
+
+- (NSURLSessionDataTask *)PATCH:(NSString *)URLString
+				   parameters:(id)parameters
+					  success:(abm_Auth2Manager_successBlock)success
+					  failure:(abm_Auth2Manager_failureBlock)failure;
+
+- (NSURLSessionDataTask *)DELETE:(NSString *)URLString
 				   parameters:(id)parameters
 					  success:(abm_Auth2Manager_successBlock)success
 					  failure:(abm_Auth2Manager_failureBlock)failure;
