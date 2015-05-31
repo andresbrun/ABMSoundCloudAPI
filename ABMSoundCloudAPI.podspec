@@ -29,6 +29,6 @@ Since SoundCloud decided not to maintain any longer its library for iOS I dicede
   s.source_files = 'Pod/Classes/**/*.{h,m}'
   s.resources = 'Pod/Classes/Views/*.storyboard'
 
-  s.dependency 'NSURLSession-Resplendent', '~> 0.1'
+  s.dependency 'NSURLSession-Resplendent', '~> 0.1.2'
   # s.public_header_files = 'Pod/Classes/**/*.h'
 end

@@ -19,7 +19,7 @@
 
 
 typedef void(^abm_Auth2Manager_authenticationSuccessBlock) (RUAuthenticationCredentials *credentials);
-typedef void(^abm_Auth2Manager_successBlock) (NSDictionary *jsonResponse);
+typedef void(^abm_Auth2Manager_successBlock) (id jsonResponse);
 typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 
 

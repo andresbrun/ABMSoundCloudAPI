@@ -279,7 +279,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 		}
 		
 		NSError* jsonParseError = nil;
-		NSDictionary* jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+		id jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
 		
 		if (jsonParseError)
 		{

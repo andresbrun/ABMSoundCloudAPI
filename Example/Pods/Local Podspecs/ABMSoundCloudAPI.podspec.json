@@ -27,7 +27,7 @@
   "resources": "Pod/Classes/Views/*.storyboard",
   "dependencies": {
     "NSURLSession-Resplendent": [
-      "~> 0.1"
+      "~> 0.1.2"
     ]
   }
 }
