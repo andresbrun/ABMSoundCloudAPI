@@ -130,73 +130,103 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 - (void)requestPlaylistsWithSuccess:(void (^)(NSArray *playlists))successBlock
                             failure:(void (^)(NSError *error))failureBlock {
-//    NSString *path = @"/me/playlists";
-//    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
-//    
-//    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSArray class]]) {
-//            successBlock(responseObject);
-//        } else {
-//            failureBlock([NSError createParsingError]);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
+    NSString *path = @"/me/playlists";
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+	
+	
+	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
+		if ([jsonResponse isKindOfClass:[NSArray class]])
+		{
+			if (successBlock)
+			{
+				successBlock(jsonResponse);
+			}
+		}
+		else
+		{
+			if (failureBlock)
+			{
+				failureBlock([NSError createParsingError]);
+			}
+		}
+	} failure:failureBlock];
 }
 
 - (void)requestPlaylistWithID:(NSString *) playlistID
                   withSuccess:(void (^)(NSDictionary *songsDict))successBlock
                       failure:(void (^)(NSError *error))failureBlock {
-//    NSString *path = [NSString stringWithFormat:@"/playlists/%@.json", playlistID];
-//    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
-//    
-//    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            successBlock(responseObject);
-//        } else {
-//            failureBlock([NSError createParsingError]);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
+    NSString *path = [NSString stringWithFormat:@"/playlists/%@.json", playlistID];
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+	
+	
+	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
+		if ([jsonResponse isKindOfClass:[NSDictionary class]])
+		{
+			if (successBlock)
+			{
+				successBlock(jsonResponse);
+			}
+		}
+		else
+		{
+			if (failureBlock)
+			{
+				failureBlock([NSError createParsingError]);
+			}
+		}
+	} failure:failureBlock];
 }
 
 - (void)requestSongsForQuery:(NSString *)query
                        limit:(NSUInteger)limit
                  withSuccess:(void (^)(NSDictionary *songsDict))successBlock
                      failure:(void (^)(NSError *error))failureBlock {
-//    NSString *path = @"/search/suggest";
-//    NSDictionary *params = @{@"q":query,
-//                             @"limit" : @(limit),
-//                             @"oauth_token": self.credentials.accessToken};
-//    
-//    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            successBlock(responseObject);
-//        } else {
-//            failureBlock([NSError createParsingError]);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
+    NSString *path = @"/search/suggest";
+    NSDictionary *params = @{@"q":query,
+                             @"limit" : @(limit),
+                             @"oauth_token": self.credentials.accessToken};
+	
+	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
+		if ([jsonResponse isKindOfClass:[NSDictionary class]])
+		{
+			if (successBlock)
+			{
+				successBlock(jsonResponse);
+			}
+		}
+		else
+		{
+			if (failureBlock)
+			{
+				failureBlock([NSError createParsingError]);
+			}
+		}
+	} failure:failureBlock];
 }
 
 - (void)requestSongById:(NSString *)songID
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
                 failure:(void (^)(NSError *error))failureBlock {
 
-//    NSString *path = [NSString stringWithFormat:@"/tracks/%@.json", songID];
-//    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
-//    
-//    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            successBlock(responseObject);
-//        } else {
-//            failureBlock([NSError createParsingError]);
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
+    NSString *path = [NSString stringWithFormat:@"/tracks/%@.json", songID];
+    NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
+	
+	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
+		if ([jsonResponse isKindOfClass:[NSDictionary class]])
+		{
+			if (successBlock)
+			{
+				successBlock(jsonResponse);
+			}
+		}
+		else
+		{
+			if (failureBlock)
+			{
+				failureBlock([NSError createParsingError]);
+			}
+		}
+	} failure:failureBlock];
 }
 
 - (void)followUserId:(NSString *)userID
