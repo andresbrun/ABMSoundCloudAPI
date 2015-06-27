@@ -1,17 +1,26 @@
 PODS:
-  - ABMSoundCloudAPI (0.1.1):
-    - NSURLSession-Resplendent (~> 0.1.2)
-  - NSURLSession-Resplendent (0.1.2)
+  - ABMSoundCloudAPI (0.1.1)
+  - NSURLSession-Resplendent (0.1.3)
 
 DEPENDENCIES:
   - ABMSoundCloudAPI (from `../`)
+  - NSURLSession-Resplendent (from `https://github.com/Resplendent/NSURLSession-Resplendent.git`,
+    tag `v0.1.3`)
 
 EXTERNAL SOURCES:
   ABMSoundCloudAPI:
     :path: ../
+  NSURLSession-Resplendent:
+    :git: https://github.com/Resplendent/NSURLSession-Resplendent.git
+    :tag: v0.1.3
+
+CHECKOUT OPTIONS:
+  NSURLSession-Resplendent:
+    :git: https://github.com/Resplendent/NSURLSession-Resplendent.git
+    :tag: v0.1.3
 
 SPEC CHECKSUMS:
-  ABMSoundCloudAPI: 1c981f54f81859410c099e363fdc1205320e8075
-  NSURLSession-Resplendent: b08d7f883c546489cd593147ae6942ac28117df6
+  ABMSoundCloudAPI: 453797ded6dbb83b52162df8b11096f6bd183ff5
+  NSURLSession-Resplendent: 33c7a2c6319f055cf805464e68eb7f225296a3a1
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.37.2

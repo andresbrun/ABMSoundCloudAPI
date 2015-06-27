@@ -261,13 +261,42 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 		return nil;
 	}
 
-	void (^failureCheckBlock)(NSError* error) = ^(NSError* error){
-		if (failure)
+	void (^dispatchToCorrectThread)(void (^blockToRun)(void)) = ^(void (^blockToRun)(void)){
+		if (blockToRun)
 		{
-			failure(error);
+			dispatch_queue_t queue = (self.completionQueue ?: dispatch_get_main_queue());
+			if (queue)
+			{
+				dispatch_async(queue, ^{
+					blockToRun();
+				});
+			}
+			else
+			{
+				NSAssert(false, @"Should always have a queue");
+				blockToRun();
+			}
 		}
 	};
-
+	
+	void (^failureCheckBlock)(NSError* error) = ^(NSError* error){
+		dispatchToCorrectThread(^{
+			if (failure)
+			{
+				failure(error);
+			}
+		});
+	};
+	
+	void (^successCheckBlock)(id jsonResponse) = ^(id jsonResponse){
+		dispatchToCorrectThread(^{
+			if (success)
+			{
+				success(jsonResponse);
+			}
+		});
+	};
+	
 	NSURLSessionDataTask* URLSessionDataTask = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 		
 		if (error ||
@@ -286,11 +315,8 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 			failureCheckBlock(jsonParseError);
 			return;
 		}
-		
-		if (success)
-		{
-			success(jsonData);
-		}
+
+		successCheckBlock(jsonData);
 		
 	}];
 	

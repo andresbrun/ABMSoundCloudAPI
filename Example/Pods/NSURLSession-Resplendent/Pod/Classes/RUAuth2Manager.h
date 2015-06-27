@@ -32,6 +32,8 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 @property (nonatomic, copy) NSString* secret;
 @property (nonatomic, copy) NSURL* baseURL;
 
+@property (nonatomic, strong) dispatch_queue_t completionQueue;
+
 #pragma mark - General
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
 					parameters:(id)parameters
