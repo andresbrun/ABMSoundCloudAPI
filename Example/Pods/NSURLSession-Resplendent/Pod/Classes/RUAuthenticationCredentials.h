@@ -1,5 +1,5 @@
 //
-//  ABMAuthenticationCredentials.h
+//  RUAuthenticationCredentials.h
 //  Pods
 //
 //  Created by Benjamin Maer on 4/11/15.
@@ -7,6 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
+
+
+
+extern NSString * const kRUAuthenticationCredentials_credentialServiceName;
 
 
 

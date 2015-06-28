@@ -1,5 +1,5 @@
 //
-//  ABMAuthenticationCredentials.m
+//  RUAuthenticationCredentials.m
 //  Pods
 //
 //  Created by Benjamin Maer on 4/11/15.
@@ -14,18 +14,18 @@
 
 
 
-static NSString * const kABMOAuth2CredentialServiceName = @"kABMOAuth2CredentialService";
+NSString * const kRUAuthenticationCredentials_credentialServiceName = @"kRUAuthenticationCredentials_credentialServiceName";
 
 
 
 
 
-static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identifier) {
+static NSDictionary * RUKeychainQueryDictionaryWithIdentifier(NSString *identifier) {
 	NSCParameterAssert(identifier);
 	
 	return @{
 			 (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-			 (__bridge id)kSecAttrService: kABMOAuth2CredentialServiceName,
+			 (__bridge id)kSecAttrService: kRUAuthenticationCredentials_credentialServiceName,
 			 (__bridge id)kSecAttrAccount: identifier
     };
 }
@@ -111,7 +111,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 		 withIdentifier:(NSString *)identifier
 	  withAccessibility:(id)securityAccessibility
 {
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
+	NSMutableDictionary *queryDictionary = [RUKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
 	
 	if (!credential) {
 		return [self deleteCredentialWithIdentifier:identifier];
@@ -143,7 +143,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 
 + (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier
 {
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
+	NSMutableDictionary *queryDictionary = [RUKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
 	
 	OSStatus status = SecItemDelete((__bridge CFDictionaryRef)queryDictionary);
 	
@@ -156,7 +156,7 @@ static NSDictionary * ABMKeychainQueryDictionaryWithIdentifier(NSString *identif
 
 + (RUAuthenticationCredentials *)retrieveCredentialWithIdentifier:(NSString *)identifier
 {
-	NSMutableDictionary *queryDictionary = [ABMKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
+	NSMutableDictionary *queryDictionary = [RUKeychainQueryDictionaryWithIdentifier(identifier) mutableCopy];
 	queryDictionary[(__bridge id)kSecReturnData] = (__bridge id)kCFBooleanTrue;
 	queryDictionary[(__bridge id)kSecMatchLimit] = (__bridge id)kSecMatchLimitOne;
 	

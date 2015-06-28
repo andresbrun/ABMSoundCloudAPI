@@ -1,5 +1,5 @@
 //
-//  ABMAuth2Manager.h
+//  RUAuth2Manager.h
 //  Pods
 //
 //  Created by Benjamin Maer on 4/6/15.
@@ -18,9 +18,9 @@
 
 
 
-typedef void(^abm_Auth2Manager_authenticationSuccessBlock) (RUAuthenticationCredentials *credentials);
-typedef void(^abm_Auth2Manager_successBlock) (id jsonResponse);
-typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
+typedef void(^ru_Auth2Manager_authenticationSuccessBlock) (RUAuthenticationCredentials *credentials);
+typedef void(^ru_Auth2Manager_successBlock) (id jsonResponse);
+typedef void(^ru_Auth2Manager_failureBlock) (NSError *error);
 
 
 
@@ -37,34 +37,34 @@ typedef void(^abm_Auth2Manager_failureBlock) (NSError *error);
 #pragma mark - General
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
 					parameters:(id)parameters
-					   success:(abm_Auth2Manager_successBlock)success
-					   failure:(abm_Auth2Manager_failureBlock)failure;
+					   success:(ru_Auth2Manager_successBlock)success
+					   failure:(ru_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure;
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure;
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure;
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure;
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure;
 
 #pragma mark - Authentication
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri
-													  success:(abm_Auth2Manager_authenticationSuccessBlock)success
-													  failure:(abm_Auth2Manager_failureBlock)failure;
+													  success:(ru_Auth2Manager_authenticationSuccessBlock)success
+													  failure:(ru_Auth2Manager_failureBlock)failure;
 
 @end

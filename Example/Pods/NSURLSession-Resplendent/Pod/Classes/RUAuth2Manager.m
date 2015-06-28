@@ -1,5 +1,5 @@
 //
-//  ABMAuth2Manager.m
+//  RUAuth2Manager.m
 //  Pods
 //
 //  Created by Benjamin Maer on 4/6/15.
@@ -13,32 +13,31 @@
 
 
 
-NSString * const kABMAuth2Manager_AuthCodeGrantType = @"authorization_code";
+static NSString * const kRUAuth2Manager_AuthCodeGrantType = @"authorization_code";
 
 
 
 
 
-typedef NS_ENUM(NSInteger, ABMAuth2Manager_HTTPMethodType) {
-	ABMAuth2Manager_HTTPMethodType_GET,
-	ABMAuth2Manager_HTTPMethodType_POST,
-	ABMAuth2Manager_HTTPMethodType_PUT,
-	ABMAuth2Manager_HTTPMethodType_PATCH,
-	ABMAuth2Manager_HTTPMethodType_DELETE,
+typedef NS_ENUM(NSInteger, RUAuth2Manager_HTTPMethodType) {
+	RUAuth2Manager_HTTPMethodType_GET,
+	RUAuth2Manager_HTTPMethodType_POST,
+	RUAuth2Manager_HTTPMethodType_PUT,
+	RUAuth2Manager_HTTPMethodType_PATCH,
+	RUAuth2Manager_HTTPMethodType_DELETE,
 };
 
-static NSString * const kAMBCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
-static NSString * const kABMOAuth2ErrorDomain = @"com.ABMnetworking.oauth2.error";
-static NSString * const kABMOAuth2CredentialServiceName = @"kABMOAuth2CredentialService";
+static NSString * const kRURUAuth2Manager_charactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
+static NSString * const kRURUAuth2Manager_errorDomain = @"com.NSURLSession-Resplendent.RUAuth2Manager.oauth2.error";
 
 static NSString * AMBPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
 	static NSString * const kAFCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
 	
-	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescapedInQueryStringPairKey, (__bridge CFStringRef)kAMBCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
+	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescapedInQueryStringPairKey, (__bridge CFStringRef)kRURUAuth2Manager_charactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
 // See: http://tools.ietf.org/html/rfc6749#section-5.2
-static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
+static NSError * RUAuth2Manager_errorFromRFC6749Section5_2Error(id object) {
 	if (![object valueForKey:@"error"] || [[object valueForKey:@"error"] isEqual:[NSNull null]]) {
 		return nil;
 	}
@@ -70,7 +69,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 		mutableUserInfo[NSLocalizedRecoverySuggestionErrorKey] = [object valueForKey:@"error_uri"];
 	}
 	
-	return [NSError errorWithDomain:kABMOAuth2ErrorDomain code:-1 userInfo:mutableUserInfo];
+	return [NSError errorWithDomain:kRURUAuth2Manager_errorDomain code:-1 userInfo:mutableUserInfo];
 }
 
 
@@ -83,23 +82,23 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 												   parameters:(NSDictionary *)parameters
-													  success:(abm_Auth2Manager_authenticationSuccessBlock)success
-													  failure:(abm_Auth2Manager_failureBlock)failure;
+													  success:(ru_Auth2Manager_authenticationSuccessBlock)success
+													  failure:(ru_Auth2Manager_failureBlock)failure;
 
 - (NSURLSessionDataTask *)URLSessionDataTaskWithRequest:(NSURLRequest*)URLRequest
-												success:(abm_Auth2Manager_successBlock)success
-												failure:(abm_Auth2Manager_failureBlock)failure;
+												success:(ru_Auth2Manager_successBlock)success
+												failure:(ru_Auth2Manager_failureBlock)failure;
 
 -(void)applyParameters:(id)parameters toHTTPBodyOfRequest:(NSMutableURLRequest*)URLRequest;
 -(NSString*)URLStringWithParameters:(id)parameters withBaseURLString:(NSString*)URLString;
--(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
+-(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 - (NSMutableURLRequest *)URLRequestURLString:(NSString*)URLString
 								  parameters:(id)parameters
-							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
+							  HTTPMethodType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType;
 
-+(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
-+(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType;
++(NSString*)requestHTTPMethodForType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType;
++(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(RUAuth2Manager_HTTPMethodType)HTTPMethodType;
 
 @end
 
@@ -136,8 +135,8 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 														 code:(NSString *)code
 												  redirectURI:(NSString *)uri
-													  success:(abm_Auth2Manager_authenticationSuccessBlock)success
-													  failure:(abm_Auth2Manager_failureBlock)failure
+													  success:(ru_Auth2Manager_authenticationSuccessBlock)success
+													  failure:(ru_Auth2Manager_failureBlock)failure
 {
 	if (URLString.length == 0)
 	{
@@ -164,7 +163,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 	NSDictionary *parameters =
  @{
-   @"grant_type"	: kABMAuth2Manager_AuthCodeGrantType,
+   @"grant_type"	: kRUAuth2Manager_AuthCodeGrantType,
    @"code"			: code,
    @"redirect_uri"	: encodedURI
    };
@@ -174,8 +173,8 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)authenticateUsingOAuthWithURLString:(NSString *)URLString
 												   parameters:(NSDictionary *)parameters
-													  success:(abm_Auth2Manager_authenticationSuccessBlock)success
-													  failure:(abm_Auth2Manager_failureBlock)failure
+													  success:(ru_Auth2Manager_authenticationSuccessBlock)success
+													  failure:(ru_Auth2Manager_failureBlock)failure
 {
 	if (self.baseURL == nil)
 	{
@@ -206,7 +205,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 		if ([jsonResponse valueForKey:@"error"]) {
 			if (failure) {
-				failure(ABMErrorFromRFC6749Section5_2Error(jsonResponse));
+				failure(RUAuth2Manager_errorFromRFC6749Section5_2Error(jsonResponse));
 			}
 			
 			return;
@@ -246,8 +245,8 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 #pragma mark - Requests
 - (NSURLSessionDataTask *)URLSessionDataTaskWithRequest:(NSURLRequest*)URLRequest
-												success:(abm_Auth2Manager_successBlock)success
-												failure:(abm_Auth2Manager_failureBlock)failure
+												success:(ru_Auth2Manager_successBlock)success
+												failure:(ru_Auth2Manager_failureBlock)failure
 {
 	if (self.session == nil)
 	{
@@ -374,7 +373,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	return mutableURLString;
 }
 
--(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+-(NSURL*)URLWithString:(NSString*)URLString parameters:(id)parameters HTTPMethodType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType
 {
 	if (parameters &&
 		([[self class]HTTPMethodTypeEncodesParametersIntoFormBody:HTTPMethodType] == false))
@@ -385,17 +384,17 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	return [NSURL URLWithString:URLString relativeToURL:self.baseURL];
 }
 
-+(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
++(BOOL)HTTPMethodTypeEncodesParametersIntoFormBody:(RUAuth2Manager_HTTPMethodType)HTTPMethodType
 {
 	switch (HTTPMethodType)
 	{
-		case ABMAuth2Manager_HTTPMethodType_POST:
-		case ABMAuth2Manager_HTTPMethodType_PUT:
-		case ABMAuth2Manager_HTTPMethodType_PATCH:
+		case RUAuth2Manager_HTTPMethodType_POST:
+		case RUAuth2Manager_HTTPMethodType_PUT:
+		case RUAuth2Manager_HTTPMethodType_PATCH:
 			return YES;
 			
-		case ABMAuth2Manager_HTTPMethodType_GET:
-		case ABMAuth2Manager_HTTPMethodType_DELETE:
+		case RUAuth2Manager_HTTPMethodType_GET:
+		case RUAuth2Manager_HTTPMethodType_DELETE:
 			return NO;
 	}
 
@@ -404,7 +403,7 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSMutableURLRequest *)URLRequestURLString:(NSString*)URLString
 								  parameters:(id)parameters
-							  HTTPMethodType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
+							  HTTPMethodType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType
 {
 	if (URLString.length == 0)
 	{
@@ -444,10 +443,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
 					parameters:(id)parameters
-					   success:(abm_Auth2Manager_successBlock)success
-					   failure:(abm_Auth2Manager_failureBlock)failure
+					   success:(ru_Auth2Manager_successBlock)success
+					   failure:(ru_Auth2Manager_failureBlock)failure
 {
-	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_POST];
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:RUAuth2Manager_HTTPMethodType_POST];
 	if (request == nil)
 	{
 		NSAssert(false, @"unhandled");
@@ -459,10 +458,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure
 {
-	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_PUT];
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:RUAuth2Manager_HTTPMethodType_PUT];
 	if (request == nil)
 	{
 		NSAssert(false, @"unhandled");
@@ -474,10 +473,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure
 {
-	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_GET];
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:RUAuth2Manager_HTTPMethodType_GET];
 	if (request == nil)
 	{
 		NSAssert(false, @"unhandled");
@@ -489,10 +488,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
 					 parameters:(id)parameters
-						success:(abm_Auth2Manager_successBlock)success
-						failure:(abm_Auth2Manager_failureBlock)failure
+						success:(ru_Auth2Manager_successBlock)success
+						failure:(ru_Auth2Manager_failureBlock)failure
 {
-	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_PATCH];
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:RUAuth2Manager_HTTPMethodType_PATCH];
 	if (request == nil)
 	{
 		NSAssert(false, @"unhandled");
@@ -504,10 +503,10 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
 				   parameters:(id)parameters
-					  success:(abm_Auth2Manager_successBlock)success
-					  failure:(abm_Auth2Manager_failureBlock)failure
+					  success:(ru_Auth2Manager_successBlock)success
+					  failure:(ru_Auth2Manager_failureBlock)failure
 {
-	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:ABMAuth2Manager_HTTPMethodType_DELETE];
+	NSMutableURLRequest *request = [self URLRequestURLString:URLString parameters:parameters HTTPMethodType:RUAuth2Manager_HTTPMethodType_DELETE];
 	if (request == nil)
 	{
 		NSAssert(false, @"unhandled");
@@ -517,23 +516,23 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	return [self URLSessionDataTaskWithRequest:request success:success failure:failure];
 }
 
-+(NSString*)requestHTTPMethodForType:(ABMAuth2Manager_HTTPMethodType)HTTPMethodType
++(NSString*)requestHTTPMethodForType:(RUAuth2Manager_HTTPMethodType)HTTPMethodType
 {
 	switch (HTTPMethodType)
 	{
-		case ABMAuth2Manager_HTTPMethodType_GET:
+		case RUAuth2Manager_HTTPMethodType_GET:
 			return @"GET";
 
-		case ABMAuth2Manager_HTTPMethodType_POST:
+		case RUAuth2Manager_HTTPMethodType_POST:
 			return @"POST";
 
-		case ABMAuth2Manager_HTTPMethodType_PUT:
+		case RUAuth2Manager_HTTPMethodType_PUT:
 			return @"PUT";
 			
-		case ABMAuth2Manager_HTTPMethodType_DELETE:
+		case RUAuth2Manager_HTTPMethodType_DELETE:
 			return @"DELETE";
 			
-		case ABMAuth2Manager_HTTPMethodType_PATCH:
+		case RUAuth2Manager_HTTPMethodType_PATCH:
 			return @"PATCH";
 	}
 
