@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "82AD7B7E42059D5CC2128129"
+               BlueprintIdentifier = "B02EF5EB04C2AAD6AFD42F8F"
                BuildableName = "libPods-ABMSoundCloudAPI-ABMSoundCloudAPI.a"
                BlueprintName = "Pods-ABMSoundCloudAPI-ABMSoundCloudAPI"
                ReferencedContainer = "container:Pods.xcodeproj">

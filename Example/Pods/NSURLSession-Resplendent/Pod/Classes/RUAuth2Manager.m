@@ -347,17 +347,23 @@ static NSError * ABMErrorFromRFC6749Section5_2Error(id object) {
 	{
 		if ([parameters isKindOfClass:[NSDictionary class]])
 		{
-			NSDictionary* parametersDictionary = parameters;
+			NSDictionary* parametersDictionary = [parameters copy];
+			NSMutableArray* keyObjectComponentsArray = [NSMutableArray arrayWithCapacity:parametersDictionary.count];
 			[parametersDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 				
-				if (mutableURLString.length)
-				{
-					[mutableURLString appendString:@"&"];
-				}
-
-				[mutableURLString appendFormat:@"%@=%@",key,obj];
+				[keyObjectComponentsArray addObject:[NSString stringWithFormat:@"%@=%@",key,obj]];
 
 			}];
+
+			if (keyObjectComponentsArray.count > 0)
+			{
+				if (mutableURLString.length > 0)
+				{
+					[mutableURLString appendString:@"?"];
+				}
+
+				[mutableURLString appendString:[keyObjectComponentsArray componentsJoinedByString:@"&"]];
+			}
 		}
 		else
 		{
