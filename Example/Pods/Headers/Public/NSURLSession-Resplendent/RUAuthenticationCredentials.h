@@ -1,0 +1,1 @@
+../../../NSURLSession-Resplendent/Pod/Classes/RUAuthenticationCredentials.h

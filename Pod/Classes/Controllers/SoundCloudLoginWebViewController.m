@@ -58,7 +58,19 @@
 }
 
 - (BOOL)isFlowFinishWithRequest:(NSURLRequest *)request {
-    NSString *baseURL = [@[request.URL.scheme, request.URL.host] componentsJoinedByString:@"://"];
+	NSString* scheme = request.URL.scheme;
+	if (scheme == nil)
+	{
+		return NO;
+	}
+
+	NSString* host = request.URL.host;
+	if (host == nil)
+	{
+		return NO;
+	}
+
+	NSString *baseURL = [@[scheme, host] componentsJoinedByString:@"://"];
     return [baseURL rangeOfString:self.redirectURL].location!=NSNotFound;
 }
 

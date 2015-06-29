@@ -1,13 +1,21 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'ABMSoundCloudAPI', :exclusive => true do
+
+
+
+
+def import_pods
   pod "ABMSoundCloudAPI", :path => "../"
-  pod "AFNetworking", "~> 2.5.0"
-  pod "AFOAuth2Manager", "~> 2.2.0"
+end
+
+
+
+
+
+target 'ABMSoundCloudAPI', :exclusive => true do
+  import_pods
 end
 
 target 'Tests', :exclusive => true do
-  pod "ABMSoundCloudAPI", :path => "../"
-
-  
+  import_pods
 end
