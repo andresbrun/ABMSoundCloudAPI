@@ -17,14 +17,8 @@
 #import <RUAuthenticationCredentials.h>
 
 
-
-
-
 NSString *SC_API_URL = @"https://api.soundcloud.com";
 NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
-
-
-
 
 
 @interface SoundCloudPort ()
@@ -39,9 +33,6 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 @end
 
 
-
-
-
 @implementation SoundCloudPort
 
 - (instancetype)initWithClientId:(NSString *)clientID
@@ -49,7 +40,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	
 	self = [super init];
 	if (self) {
-		_oAuth2Manager = [RUAuth2Manager new];
+		self.oAuth2Manager = [RUAuth2Manager new];
 		[self.oAuth2Manager setBaseURL:[NSURL URLWithString:SC_API_URL]];
 		[self.oAuth2Manager setClientId:clientID];
 		[self.oAuth2Manager setSecret:clientSecret];
@@ -116,7 +107,6 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	self.lastURLSessionDataTask = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(RUAuthenticationCredentials *credentials) {
 
 		[RUAuthenticationCredentials storeCredential:credentials withIdentifier:PROVIDER_IDENTIFIER];
-
 		resultBlock(YES);
 
 	} failure:^(NSError *error) {
@@ -135,20 +125,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	
 	
 	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
-		if ([jsonResponse isKindOfClass:[NSArray class]])
-		{
-			if (successBlock)
-			{
-				successBlock(jsonResponse);
-			}
-		}
-		else
-		{
-			if (failureBlock)
-			{
-				failureBlock([NSError createParsingError]);
-			}
-		}
+		[self handleResponse:jsonResponse ofType:[NSArray class] withSuccess:successBlock failure:failureBlock];
 	} failure:failureBlock];
 }
 
@@ -160,20 +137,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 	
 	
 	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
-		if ([jsonResponse isKindOfClass:[NSDictionary class]])
-		{
-			if (successBlock)
-			{
-				successBlock(jsonResponse);
-			}
-		}
-		else
-		{
-			if (failureBlock)
-			{
-				failureBlock([NSError createParsingError]);
-			}
-		}
+		[self handleResponse:jsonResponse ofType:[NSDictionary class] withSuccess:successBlock failure:failureBlock];
 	} failure:failureBlock];
 }
 
@@ -187,20 +151,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
                              @"oauth_token": self.credentials.accessToken};
 	
 	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
-		if ([jsonResponse isKindOfClass:[NSDictionary class]])
-		{
-			if (successBlock)
-			{
-				successBlock(jsonResponse);
-			}
-		}
-		else
-		{
-			if (failureBlock)
-			{
-				failureBlock([NSError createParsingError]);
-			}
-		}
+		[self handleResponse:jsonResponse ofType:[NSDictionary class] withSuccess:successBlock failure:failureBlock];
 	} failure:failureBlock];
 }
 
@@ -212,20 +163,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
 	
 	self.lastURLSessionDataTask = [self.oAuth2Manager GET:path parameters:params success:^(id jsonResponse) {
-		if ([jsonResponse isKindOfClass:[NSDictionary class]])
-		{
-			if (successBlock)
-			{
-				successBlock(jsonResponse);
-			}
-		}
-		else
-		{
-			if (failureBlock)
-			{
-				failureBlock([NSError createParsingError]);
-			}
-		}
+		[self handleResponse:jsonResponse ofType:[NSDictionary class] withSuccess:successBlock failure:failureBlock];
 	} failure:failureBlock];
 }
 
@@ -237,21 +175,23 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
 
 	self.lastURLSessionDataTask = [self.oAuth2Manager PUT:path parameters:params success:^(NSDictionary *jsonResponse) {
-        if ([jsonResponse isKindOfClass:[NSDictionary class]])
-		{
-			if (successBlock)
-			{
-				successBlock(jsonResponse);
-			}
-        }
-		else
-		{
-			if (failureBlock)
-			{
-				failureBlock([NSError createParsingError]);
-			}
-        }
+        [self handleResponse:jsonResponse ofType:[NSDictionary class] withSuccess:successBlock failure:failureBlock];
     } failure:failureBlock];
+}
+
+- (void)handleResponse:(id)jsonResponse
+                ofType:(Class)responseType
+           withSuccess:(void (^)(id responseObject))successBlock
+               failure:(void (^)(NSError *error))failureBlock {
+    if ([jsonResponse isKindOfClass:responseType]) {
+        if (successBlock) {
+            successBlock(jsonResponse);
+        }
+    } else {
+        if (failureBlock) {
+            failureBlock([NSError createParsingError]);
+        }
+    }
 }
 
 //- (void)downloadDataForSongURL:(NSString *)songStream
@@ -286,15 +226,11 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 - (void)cancelLastOperation {
 	[self.lastURLSessionDataTask cancel];
 	[self setLastURLSessionDataTask:nil];
-
-//	[self.lastOperation cancel];
-//    [self.lastDownloadOperation cancelByProducingResumeData:nil];
 }
 
 #pragma mark - webURLForLogin
 - (NSString *)webURLForLogin {
 	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientId];
-	//	return [NSString stringWithFormat:@"https://soundcloud.com/connect?client_id=%@&response_type=code",self.oAuth2Manager.clientID];
 }
 
 @end
