@@ -19,7 +19,29 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+* To run the example project, clone the repo, and run `pod install` from the Example directory first.
+* How to upload audio file to soundcloud (this is basic example with basic meta information)
+
+```
+    NSDictionary *params = @{
+                             @"track[title]": @"title",
+                             @"track[permalink]": @"permalink", //lowercase is must
+                             @"track[tag_list]": @"tag", //lowercaset is must
+                             @"triack[sharing]": @"public",
+                             @"track[downloadable]": @YES
+                             };
+    
+    
+    [[ABMSoundCloudAPISingleton sharedManager].soundCloudPort uploadAudioFile:fileData withMimeType:@"audio/mp4" withMeta:params withSuccess:^(NSDictionary *songDict) {
+    
+        NSLog(@"success");
+    
+    } failure:^(NSError *error) {
+    
+        NSLog(@"error");
+        
+    }];
+```
 
 ## Dependencies
 

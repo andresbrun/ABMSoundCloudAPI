@@ -234,4 +234,35 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
     [self.lastDownloadOperation cancelByProducingResumeData:nil];
 }
 
+- (void)uploadAudioFile:(NSData *)fileData
+           withMimeType:(NSString*)mimeType
+               withMeta:(NSDictionary*)params
+            withSuccess:(void (^)(NSDictionary *songDict))successBlock
+                failure:(void (^)(NSError *error))failureBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"/tracks"];
+    
+    NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithDictionary:params];
+    [tmp setValue:self.credentials.accessToken forKey:@"oauth_token"];
+    
+    [self.oAuth2Manager POST:path parameters:tmp constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+        [formData appendPartWithFileData:fileData name:@"track[asset_data]" fileName:@"fileName" mimeType:mimeType];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            successBlock(responseObject);
+        } else {
+            failureBlock([NSError createParsingError]);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+     
+        failureBlock(error);
+        
+    }];
+    
+}
+
 @end
