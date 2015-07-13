@@ -45,4 +45,10 @@
 
 - (void)cancelLastOperation;
 
+- (void)uploadAudioFile:(NSData *)fileData
+           withMimeType:(NSString*)mimeType
+               withMeta:(NSDictionary*)params
+            withSuccess:(void (^)(NSDictionary *songDict))successBlock
+                failure:(void (^)(NSError *error))failureBlock;
+
 @end
