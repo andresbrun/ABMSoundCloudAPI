@@ -21,6 +21,7 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+
 ## Dependencies
 
 * `AFNetworking`, '~> 2.5'
