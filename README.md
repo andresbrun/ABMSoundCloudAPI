@@ -32,7 +32,7 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
                              };
     
     
-    [[ABMSoundCloudAPISingleton sharedManager].soundCloudPort uploadAudioFile:fileData withMimeType:@"audio/mp4" withMeta:params withSuccess:^(NSDictionary *songDict) {
+    [[ABMSoundCloudAPISingleton sharedManager].soundCloudPort uploadAudioFile:fileData mimeType:@"audio/mp4" meta:params withSuccess:^(NSDictionary *songDict) {
     
         NSLog(@"success");
     

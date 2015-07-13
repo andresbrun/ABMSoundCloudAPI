@@ -43,12 +43,12 @@
                        failure:(void (^)(NSError *error))failureBlock
                       progress:(void (^)(CGFloat progress))progressBlock;
 
-- (void)cancelLastOperation;
-
 - (void)uploadAudioFile:(NSData *)fileData
-           withMimeType:(NSString*)mimeType
-               withMeta:(NSDictionary*)params
+               mimeType:(NSString*)mimeType
+                   meta:(NSDictionary*)params
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
                 failure:(void (^)(NSError *error))failureBlock;
+
+- (void)cancelLastOperation;
 
 @end
