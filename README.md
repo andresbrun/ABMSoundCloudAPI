@@ -22,7 +22,7 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
 * To run the example project, clone the repo, and run `pod install` from the Example directory first.
 * How to upload audio file to soundcloud (this is basic example with basic meta information)
 
-```
+```objective-c
     NSDictionary *params = @{
                              @"track[title]": @"title",
                              @"track[permalink]": @"permalink", //lowercase is must
