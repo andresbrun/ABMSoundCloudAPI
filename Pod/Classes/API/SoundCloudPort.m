@@ -255,7 +255,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
 
 - (void)cancelLastOperation {
     [self.lastOperation cancel];
-    [self.lastDownloadOperation cancelByProducingResumeData:nil];
+    [self.lastDownloadOperation cancel];
 }
 
 @end
