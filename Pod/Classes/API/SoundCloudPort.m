@@ -22,7 +22,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
 @interface SoundCloudPort ()
 @property (strong, nonatomic) AFOAuth2Manager *oAuth2Manager;
 @property (strong, nonatomic) AFOAuthCredential *credentials;
-@property (strong, nonatomic) AFHTTPRequestOperation *lastOperation;
+@property (strong, nonatomic) NSURLSessionDataTask *lastOperation;
 @property (strong, nonatomic) NSURLSessionDownloadTask *lastDownloadOperation;
 
 @property (weak, nonatomic) UIViewController *supportingVC;
@@ -116,13 +116,13 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     NSString *path = @"/me/playlists";
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
     
-    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSArray class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
@@ -133,13 +133,13 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     NSString *path = [NSString stringWithFormat:@"/playlists/%@.json", playlistID];
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
     
-    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
@@ -153,13 +153,13 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
                              @"limit" : @(limit),
                              @"oauth_token": self.credentials.accessToken};
     
-    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
@@ -171,13 +171,13 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     NSString *path = [NSString stringWithFormat:@"/tracks/%@.json", songID];
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
     
-    self.lastOperation = [self.oAuth2Manager GET:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
@@ -188,14 +188,14 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     
     NSString *path = [NSString stringWithFormat:@"/me/followings/%@.json", userID];
     NSDictionary *params = @{@"oauth_token": self.credentials.accessToken};
-    
-    self.lastOperation = [self.oAuth2Manager PUT:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   
+    self.lastOperation = [self.oAuth2Manager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
@@ -233,6 +233,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
                mimeType:(NSString*)mimeType
                    meta:(NSDictionary*)params
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
+               progress:(void (^)(NSProgress *progress))progressBlock
                 failure:(void (^)(NSError *error))failureBlock {
     
     NSString *path = @"/tracks";
@@ -240,22 +241,22 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     NSMutableDictionary *extendedParams = [[NSMutableDictionary alloc] initWithDictionary:params];
     [extendedParams setValue:self.credentials.accessToken forKey:@"oauth_token"];
     
-    [self.oAuth2Manager POST:path parameters:extendedParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [self.oAuth2Manager POST:path parameters:extendedParams constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:fileData name:@"track[asset_data]" fileName:@"fileName" mimeType:mimeType];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    } progress: progressBlock success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             successBlock(responseObject);
         } else {
             failureBlock([NSError createParsingError]);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
 
 - (void)cancelLastOperation {
     [self.lastOperation cancel];
-    [self.lastDownloadOperation cancelByProducingResumeData:nil];
+    [self.lastDownloadOperation cancel];
 }
 
 @end

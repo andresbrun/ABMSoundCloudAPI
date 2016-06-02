@@ -47,6 +47,7 @@
                mimeType:(NSString*)mimeType
                    meta:(NSDictionary*)params
             withSuccess:(void (^)(NSDictionary *songDict))successBlock
+               progress:(void (^)(NSProgress *progress))progressBlock
                 failure:(void (^)(NSError *error))failureBlock;
 
 - (void)cancelLastOperation;

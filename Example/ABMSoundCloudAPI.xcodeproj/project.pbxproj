@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30475ADFBF86B68E3B93A71D /* libPods-ABMSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C89A308F4016372F8D26B00 /* libPods-ABMSoundCloudAPI.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -20,7 +21,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		683DB4C8B23C5DDE76341063 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F60847B4B468484F1D22DF /* libPods-Tests.a */; };
 		DDBD1A7D1AB4664200BF136C /* ABMMainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A7C1AB4664200BF136C /* ABMMainTabBarViewController.m */; };
 		DDBD1A841AB4673700BF136C /* ABMSoundCloudAPISingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A831AB4673700BF136C /* ABMSoundCloudAPISingleton.m */; };
 		DDBD1A871AB4693700BF136C /* ABMConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A861AB4693700BF136C /* ABMConnectViewController.m */; };
@@ -28,7 +28,7 @@
 		DDBD1A8D1AB47E3900BF136C /* ABMSongDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A8C1AB47E3900BF136C /* ABMSongDetailViewController.m */; };
 		DDBD1A901AB49D8800BF136C /* ABMPlayListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A8F1AB49D8800BF136C /* ABMPlayListsViewController.m */; };
 		DDBD1A931AB49E2000BF136C /* ABMPlayListSongsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDBD1A921AB49E2000BF136C /* ABMPlayListSongsTableViewController.m */; };
-		E47FCD39D7F9B537AE7DB657 /* libPods-ABMSoundCloudAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90F78B6A39650511A3117E45 /* libPods-ABMSoundCloudAPI.a */; };
+		DDCBA4761D009C6B00B5E4CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDCBA4741D009C6B00B5E4CC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,13 +61,9 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		8C943452F928F6749273F25F /* ABMSoundCloudAPI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ABMSoundCloudAPI.podspec; path = ../ABMSoundCloudAPI.podspec; sourceTree = "<group>"; };
-		90F78B6A39650511A3117E45 /* libPods-ABMSoundCloudAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ABMSoundCloudAPI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		925E454F4A47F52441302EA5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		93BD85D0480914E44B290190 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		972FCC76B7E06CD9421F3702 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		B3B4FF2EF66E65A5DCB875A3 /* Pods-ABMSoundCloudAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABMSoundCloudAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ABMSoundCloudAPI/Pods-ABMSoundCloudAPI.debug.xcconfig"; sourceTree = "<group>"; };
-		D8F60847B4B468484F1D22DF /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD8B7C47BAE21CB27316736E /* Pods-ABMSoundCloudAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABMSoundCloudAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ABMSoundCloudAPI/Pods-ABMSoundCloudAPI.release.xcconfig"; sourceTree = "<group>"; };
+		9C89A308F4016372F8D26B00 /* libPods-ABMSoundCloudAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ABMSoundCloudAPI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9471293C75E4B416A014567 /* Pods-ABMSoundCloudAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABMSoundCloudAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-ABMSoundCloudAPI/Pods-ABMSoundCloudAPI.release.xcconfig"; sourceTree = "<group>"; };
 		DDBD1A7B1AB4664200BF136C /* ABMMainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMMainTabBarViewController.h; sourceTree = "<group>"; };
 		DDBD1A7C1AB4664200BF136C /* ABMMainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMMainTabBarViewController.m; sourceTree = "<group>"; };
 		DDBD1A821AB4673700BF136C /* ABMSoundCloudAPISingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMSoundCloudAPISingleton.h; sourceTree = "<group>"; };
@@ -82,6 +78,8 @@
 		DDBD1A8F1AB49D8800BF136C /* ABMPlayListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMPlayListsViewController.m; sourceTree = "<group>"; };
 		DDBD1A911AB49E2000BF136C /* ABMPlayListSongsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMPlayListSongsTableViewController.h; sourceTree = "<group>"; };
 		DDBD1A921AB49E2000BF136C /* ABMPlayListSongsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABMPlayListSongsTableViewController.m; sourceTree = "<group>"; };
+		DDCBA4751D009C6B00B5E4CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ABMSoundCloudAPI/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		EDC76854FBCE83887E70A2AA /* Pods-ABMSoundCloudAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ABMSoundCloudAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ABMSoundCloudAPI/Pods-ABMSoundCloudAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		F4721E495E4FD9F508149A15 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +91,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				E47FCD39D7F9B537AE7DB657 /* libPods-ABMSoundCloudAPI.a in Frameworks */,
+				30475ADFBF86B68E3B93A71D /* libPods-ABMSoundCloudAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +102,6 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				683DB4C8B23C5DDE76341063 /* libPods-Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +116,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				8BFDE2A6806B9975A8534D3A /* Pods */,
+				6E5831454D3BAF6811010919 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,8 +136,7 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				90F78B6A39650511A3117E45 /* libPods-ABMSoundCloudAPI.a */,
-				D8F60847B4B468484F1D22DF /* libPods-Tests.a */,
+				9C89A308F4016372F8D26B00 /* libPods-ABMSoundCloudAPI.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,6 +148,7 @@
 				DDBD1A771AB465CD00BF136C /* ViewControllers */,
 				6003F59C195388D20070C39A /* ABMAppDelegate.h */,
 				6003F59D195388D20070C39A /* ABMAppDelegate.m */,
+				DDCBA4741D009C6B00B5E4CC /* LaunchScreen.storyboard */,
 				6003F59F195388D20070C39A /* Main.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -199,13 +196,11 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		8BFDE2A6806B9975A8534D3A /* Pods */ = {
+		6E5831454D3BAF6811010919 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B3B4FF2EF66E65A5DCB875A3 /* Pods-ABMSoundCloudAPI.debug.xcconfig */,
-				DD8B7C47BAE21CB27316736E /* Pods-ABMSoundCloudAPI.release.xcconfig */,
-				93BD85D0480914E44B290190 /* Pods-Tests.debug.xcconfig */,
-				972FCC76B7E06CD9421F3702 /* Pods-Tests.release.xcconfig */,
+				EDC76854FBCE83887E70A2AA /* Pods-ABMSoundCloudAPI.debug.xcconfig */,
+				C9471293C75E4B416A014567 /* Pods-ABMSoundCloudAPI.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -245,11 +240,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "ABMSoundCloudAPI" */;
 			buildPhases = (
-				C398E77C1AE4735969012D0C /* Check Pods Manifest.lock */,
+				8F2E7433753CD2FDEFDC658A /* 📦 Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				EB1A19A0CDC935A7D3A57C3E /* Copy Pods Resources */,
+				40DFB76BCB863997498432D5 /* 📦 Embed Pods Frameworks */,
+				FF18753B6A25F0D5ACF59C83 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -264,11 +260,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				2984C4CFD0DFAD90C6628B54 /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				15ED606674F9C89923DAB8BC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -287,7 +281,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ABM;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Andres Brun Moreno";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -320,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				DDCBA4761D009C6B00B5E4CC /* LaunchScreen.storyboard in Resources */,
 				6003F5A1195388D20070C39A /* Main.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -336,44 +331,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		15ED606674F9C89923DAB8BC /* Copy Pods Resources */ = {
+		40DFB76BCB863997498432D5 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ABMSoundCloudAPI/Pods-ABMSoundCloudAPI-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2984C4CFD0DFAD90C6628B54 /* Check Pods Manifest.lock */ = {
+		8F2E7433753CD2FDEFDC658A /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C398E77C1AE4735969012D0C /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,14 +361,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		EB1A19A0CDC935A7D3A57C3E /* Copy Pods Resources */ = {
+		FF18753B6A25F0D5ACF59C83 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +438,15 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		DDCBA4741D009C6B00B5E4CC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDCBA4751D009C6B00B5E4CC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -479,6 +468,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -493,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -526,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -535,13 +525,14 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3B4FF2EF66E65A5DCB875A3 /* Pods-ABMSoundCloudAPI.debug.xcconfig */;
+			baseConfigurationReference = EDC76854FBCE83887E70A2AA /* Pods-ABMSoundCloudAPI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ABMSoundCloudAPI/ABMSoundCloudAPI-Prefix.pch";
 				INFOPLIST_FILE = "ABMSoundCloudAPI/ABMSoundCloudAPI-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -549,13 +540,14 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD8B7C47BAE21CB27316736E /* Pods-ABMSoundCloudAPI.release.xcconfig */;
+			baseConfigurationReference = C9471293C75E4B416A014567 /* Pods-ABMSoundCloudAPI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ABMSoundCloudAPI/ABMSoundCloudAPI-Prefix.pch";
 				INFOPLIST_FILE = "ABMSoundCloudAPI/ABMSoundCloudAPI-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -563,7 +555,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93BD85D0480914E44B290190 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ABMSoundCloudAPI.app/ABMSoundCloudAPI";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -578,6 +569,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -586,7 +578,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 972FCC76B7E06CD9421F3702 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ABMSoundCloudAPI.app/ABMSoundCloudAPI";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -597,6 +588,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
