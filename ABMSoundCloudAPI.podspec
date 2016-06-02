@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "ABMSoundCloudAPI"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "Own library to handle oauth2 authentication and basic operations for SoundCloud API."
   s.description      = <<-DESC
 Since SoundCloud decided not to maintain any longer its library for iOS I diceded to create my own one. Right now it is supported:

@@ -22,8 +22,8 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
 @interface SoundCloudPort ()
 @property (strong, nonatomic) AFOAuth2Manager *oAuth2Manager;
 @property (strong, nonatomic) AFOAuthCredential *credentials;
-@property (strong, nonatomic) NSURLSessionDataTask *lastOperation;
-@property (strong, nonatomic) NSURLSessionDownloadTask *lastDownloadOperation;
+@property (strong, nonatomic) NSURLSessionTask *lastOperation;
+@property (strong, nonatomic) NSURLSessionTask *lastDownloadOperation;
 
 @property (weak, nonatomic) UIViewController *supportingVC;
 @property (strong, nonatomic) NSString *redirectURL;
@@ -241,7 +241,7 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
     NSMutableDictionary *extendedParams = [[NSMutableDictionary alloc] initWithDictionary:params];
     [extendedParams setValue:self.credentials.accessToken forKey:@"oauth_token"];
     
-    [self.oAuth2Manager POST:path parameters:extendedParams constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    self.lastOperation = [self.oAuth2Manager POST:path parameters:extendedParams constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:fileData name:@"track[asset_data]" fileName:@"fileName" mimeType:mimeType];
     } progress: progressBlock success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
