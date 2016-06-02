@@ -17,7 +17,7 @@
 #import "SoundCloudLoginWebViewController.h"
 
 NSString *SC_API_URL = @"https://api.soundcloud.com";
-NSString *PROVIDER_IDENTIFIER = @"SoundClount_Crendentials";
+NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
 
 @interface SoundCloudPort ()
 @property (strong, nonatomic) AFOAuth2Manager *oAuth2Manager;

@@ -16,7 +16,7 @@
 @implementation SoundCloudLoginWebViewController
 
 + (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL redirectURL:(NSString *)redirectURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock {
-    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SoundCloudLogin" bundle:nil] instantiateInitialViewController];
+    UINavigationController *navController = [[UIStoryboard storyboardWithName:@"SoundCloudLogin" bundle:[NSBundle bundleForClass:self.class]] instantiateInitialViewController];
     SoundCloudLoginWebViewController *loginVC = [navController.viewControllers firstObject];
     if (loginVC) {
         loginVC.scLoginURL = [loginURL stringByAppendingFormat:@"&redirect_uri=%@",redirectURL];
