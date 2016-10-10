@@ -10,9 +10,9 @@
 
 @interface NSError (APISoundCloud)
 
-+ (NSError *)createParsingError;
-+ (NSError *)createNonStreamableSongError;
-+ (NSError *)createConnexionError;
-+ (NSError *)createSessionError;
++ (nonnull NSError *)createParsingError;
++ (nonnull NSError *)createNonStreamableSongError;
++ (nonnull NSError *)createConnexionError;
++ (nonnull NSError *)createSessionError;
 
 @end

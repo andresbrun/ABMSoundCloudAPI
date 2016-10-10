@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SoundCloudLoginWebViewController : UIViewController
+@interface SoundCloudLoginWebViewController: UIViewController
 
-+ (UINavigationController *)instantiateWithLoginURL:(NSString *)loginURL redirectURL:(NSString *)redirectURL resultBlock:(void (^)(BOOL result, NSString *code))resultBlock;
++ (nonnull UINavigationController *)instantiateWithLoginURL:(nonnull NSString *)loginURL
+                                                redirectURL:(nonnull NSString *)redirectURL
+                                                resultBlock:(void (^)(BOOL result, NSString *code))resultBlock;
 
-@property (strong, nonatomic) NSString *scLoginURL;
-@property (strong, nonatomic) NSString *redirectURL;
-@property (copy, nonatomic) void (^resultBlock)(BOOL success, NSString *code);
+@property (strong, nonatomic, nonnull) NSString *scLoginURL;
+@property (strong, nonatomic, nonnull) NSString *redirectURL;
+@property (copy, nonatomic) void (^resultBlock)(BOOL success,  NSString * _Nullable code);
 
 @end

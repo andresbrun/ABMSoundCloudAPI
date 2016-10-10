@@ -10,8 +10,8 @@
 
 @interface NSUserDefaults (SoundCloudToken)
 
-+ (void)saveSoundCloudToken:(NSString *)token;
-+ (NSString *)getSoundCloudCode;
++ (void)saveSoundCloudToken:(nonnull NSString *)token;
++ (nullable NSString *)getSoundCloudCode;
 + (void)removeSoundCloudCode;
 
 @end

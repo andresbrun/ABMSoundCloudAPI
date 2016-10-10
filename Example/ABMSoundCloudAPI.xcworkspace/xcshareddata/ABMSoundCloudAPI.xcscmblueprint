@@ -9,7 +9,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4E06EBDF-6D68-469B-B608-0444DC475A82",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "38D59B5098BBAA16B15C991E8F4AE8619C871E70" : "ABMSoundCloudAP",
+    "38D59B5098BBAA16B15C991E8F4AE8619C871E70" : "ABMSoundCloudAP\/",
     "70C09E0900E645CE2A932DB857353D11158164EF" : "ABMSoundCloudAPI"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ABMSoundCloudAPI",

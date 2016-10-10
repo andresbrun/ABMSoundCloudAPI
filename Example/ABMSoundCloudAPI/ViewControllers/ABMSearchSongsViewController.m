@@ -20,13 +20,13 @@
 #pragma mark - Private methods
 - (void)searchTableList {
     NSString *query = self.searchDisplayController.searchBar.text;
-   [[[ABMSoundCloudAPISingleton sharedManager] soundCloudPort] requestSongsForQuery:query limit:20 withSuccess:^(NSDictionary *songsDict) {
-       self.songsList = songsDict[@"suggestions"];
-       self.searching=NO;
-   } failure:^(NSError *error) {
-       [[[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-       self.searching=NO;
-   }];
+    [[[ABMSoundCloudAPISingleton sharedManager] soundCloudPort] requestSongsForQuery:query limit:20 withSuccess:^(NSDictionary *songsDict) {
+        self.songsList = songsDict[@"suggestions"];
+        self.searching=NO;
+    } failure:^(NSError *error) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        self.searching=NO;
+    }];
 }
 
 # pragma mark - Navigation
@@ -71,7 +71,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-
+    
     NSDictionary *songDictionary = [self.songsList objectAtIndex:indexPath.row];
     
     [cell.textLabel setAttributedText:[self createAttributtedStringFromHTMLText:songDictionary[@"query"]]];
@@ -99,9 +99,9 @@
 - (NSAttributedString *) createAttributtedStringFromHTMLText:(NSString *)htmlText {
     NSError *error;
     NSAttributedString *attributtedString = [[NSAttributedString alloc] initWithData: [htmlText dataUsingEncoding:NSUTF8StringEncoding]
-                                                            options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType }
-                                                 documentAttributes: nil
-                                                              error: &error];
+                                                                             options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType }
+                                                                  documentAttributes: nil
+                                                                               error: &error];
     if(error)
         NSLog(@"Unable to parse label text: %@", error);
     

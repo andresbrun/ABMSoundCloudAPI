@@ -100,15 +100,27 @@ NSString *PROVIDER_IDENTIFIER = @"SoundCloud_Credentials";
 
 - (void)getCredentialsForCode:(NSString *)code
                    withResult:(void (^)(BOOL success))resultBlock {
-    self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(AFOAuthCredential *credential) {
-        [AFOAuthCredential storeCredential:credential
-                            withIdentifier:PROVIDER_IDENTIFIER];
-        resultBlock(YES);
-    } failure:^(NSError *error) {
-        [NSUserDefaults removeSoundCloudCode];
-        [AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
-        resultBlock(NO);
-    }];
+    if ([self.credentials isExpired]) {
+        self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" refreshToken:self.credentials.refreshToken success:^(AFOAuthCredential * _Nonnull credential) {
+            [AFOAuthCredential storeCredential:credential
+                                withIdentifier:PROVIDER_IDENTIFIER];
+            resultBlock(YES);
+        } failure:^(NSError * _Nonnull error) {
+            [NSUserDefaults removeSoundCloudCode];
+            [AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+            resultBlock(NO);
+        }];
+    } else {
+        self.lastOperation = [self.oAuth2Manager authenticateUsingOAuthWithURLString:@"/oauth2/token/" code:code redirectURI:self.redirectURL success:^(AFOAuthCredential *credential) {
+            [AFOAuthCredential storeCredential:credential
+                                withIdentifier:PROVIDER_IDENTIFIER];
+            resultBlock(YES);
+        } failure:^(NSError *error) {
+            [NSUserDefaults removeSoundCloudCode];
+            [AFOAuthCredential deleteCredentialWithIdentifier:PROVIDER_IDENTIFIER];
+            resultBlock(NO);
+        }];
+    }
 }
 
 - (void)requestPlaylistsWithSuccess:(void (^)(NSArray *playlists))successBlock
