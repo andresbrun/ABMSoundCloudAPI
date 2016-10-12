@@ -16,17 +16,19 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
 * Get Playlists given playlist ID.
 * Get song info given song ID.
 * Follow user given user ID.
+* Upload an audio file.
 
 ## Usage
 
 * To run the example project, clone the repo, and run `pod install` from the Example directory first.
 * How to upload audio file to soundcloud (this is basic example with basic meta information)
 
+In Objective-C
 ```objective-c
     NSDictionary *params = @{
                              @"track[title]": @"title",
-                             @"track[permalink]": @"permalink", //lowercase is must
-                             @"track[tag_list]": @"tag", //lowercaset is must
+                             @"track[permalink]": @"permalink", //must be lowercase
+                             @"track[tag_list]": @"tag", //must be lowercaset
                              @"triack[sharing]": @"public",
                              @"track[downloadable]": @YES
                              };
@@ -42,11 +44,24 @@ Since SoundCloud decided not to maintain anymore its API iOS library I decided t
         
     }];
 ```
+In Swift 3.0
+
+```swift        
+    let params = ["track[title]": "title", "track[permalink]": "permalink"...]
+
+    ABMSoundCloudAPISingleton.sharedManager.uploadAudioFile(fileData, mimeType: "audio/mp4", meta: params, withSuccess: { (songDict) in
+        print("Success")
+    }, progress: { (progress) in
+        print("Progress \(progress.fractionCompleted)")
+    }) { (error) in
+        print("Error")
+    }
+```
 
 ## Dependencies
 
-* `AFNetworking`, '~> 2.5'
-* `AFOAuth2Manager`, '~> 2.2'
+* `AFNetworking`, '~> 3.0'
+* `AFOAuth2Manager`, '~> 3.0'
 
 ## Requirements
 

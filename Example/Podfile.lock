@@ -1,5 +1,5 @@
 PODS:
-  - ABMSoundCloudAPI (0.2.1):
+  - ABMSoundCloudAPI (1.0.1):
     - AFNetworking (~> 3.0)
     - AFOAuth2Manager (~> 3.0)
   - AFNetworking (3.1.0):
@@ -30,10 +30,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ABMSoundCloudAPI: 34b9c9ea9e42c32d0f1173cf5e9de9f678e2ef6a
+  ABMSoundCloudAPI: 22c50b5487c9326de14bf9f057266e6dd9a27452
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
 
 PODFILE CHECKSUM: a14b2086b5e07c84f3c22bc1e15a9f9ce8c1a835
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1
